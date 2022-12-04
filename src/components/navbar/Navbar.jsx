@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+
+import "./navbar.css";
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
+    <nav className="stroke flex relative w-full h-[4rem] bg-white items-center text-center justify-between shadow-md">
+      <div className="ml-5">Logo</div>
+      <ul className=" flex-row mr-5 lg:mr-[10rem] space-x-11 md:flex hidden">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" className="">
+            Home
+          </Link>
         </li>
         <li>
           <Link to="/about">About</Link>
@@ -24,6 +30,9 @@ const Navbar = () => {
           <Link to="/login">Login</Link>
         </li>
       </ul>
+      <div class="flex md:hidden text-3xl mr-10">
+        <GiHamburgerMenu></GiHamburgerMenu>
+      </div>
     </nav>
   );
 };
