@@ -15,7 +15,8 @@ import { NavBar } from "./components";
 const App = () => {
   return (
     <>
-      <NavBar></NavBar>
+      <NavBar className="flex relative w-full "></NavBar>
+
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/contact" element={<ContactPage />}></Route>
