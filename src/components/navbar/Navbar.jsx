@@ -30,7 +30,7 @@ const Navbar = () => {
           <Link to="/login">Login</Link>
         </li>
       </ul>
-      <div class="flex md:hidden text-3xl mr-10">
+      <div className="flex md:hidden text-3xl mr-10">
         <GiHamburgerMenu></GiHamburgerMenu>
       </div>
     </nav>
