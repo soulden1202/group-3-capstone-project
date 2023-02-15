@@ -3,7 +3,6 @@ import { useState } from "react";
 import "./Home.css";
 
 const Home = () => {
-  const [searchInput, setSearchInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
