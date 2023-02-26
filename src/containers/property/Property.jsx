@@ -10,8 +10,6 @@ const Property = () => {
   const searchUrl =
     "https://studentrentapi20230210185810.azurewebsites.net/api/Property/Search";
 
-  console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
-
   const [address, setaddress] = useState("");
   const [city, setcity] = useState("");
   const [state, setstate] = useState("");
@@ -63,6 +61,8 @@ const Property = () => {
       },
       (error) => {
         console.error(error);
+        setcenter({});
+        setpostion({});
       }
     );
   };
@@ -70,10 +70,6 @@ const Property = () => {
   const containerStyle = {
     width: "100%",
     height: "100%",
-  };
-
-  const onLoad = (marker) => {
-    console.log("marker: ", marker);
   };
 
   return (
@@ -220,7 +216,7 @@ const Property = () => {
                 center={center}
                 zoom={15}
               >
-                <Marker position={position} onLoad={onLoad} />
+                <Marker position={position} />
               </GoogleMap>
             </LoadScript>
           </div>
