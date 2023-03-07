@@ -7,7 +7,7 @@ import "./navbar.css";
 const Navbar = () => {
   return (
     <nav className="stroke flex relative w-full h-[4rem] bg-white items-center text-center justify-between shadow-md">
-      <div className="ml-5">Logo</div>
+      <div className="ml-5">Livin It</div>
       <ul className=" flex-row mr-5 lg:mr-[10rem] space-x-11 md:flex hidden">
         <li>
           <Link to="/" className="">
