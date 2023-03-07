@@ -3,7 +3,7 @@ nav {
   margin: 0 auto;
   background: #fff;
   padding: 40px 0;
-  box-shadow: 0px 5px 0px #dedede;
+  box-shadow: 0px 5px 0px #097bde;
 }
 nav ul {
   list-style: none;
@@ -14,10 +14,10 @@ nav ul li {
 }
 nav ul li a {
   display: block;
-  padding: 10px;
+  padding: 20px;
   text-decoration: none;
-  color: #aaa;
-  font-weight: 200;
+  color: #034681;
+  font-weight: 500;
   text-transform: uppercase;
 }
 nav ul li a,
@@ -71,3 +71,4 @@ nav.fill ul li a:hover:after {
   -moz-animation: fill 1s forwards;
   opacity: 1;
 }
+
