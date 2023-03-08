@@ -28,7 +28,7 @@ const Signup = () => {
     };
 
     const handleSignup = () => {
-        fetch("https://studentrentapi20230210185810.azurewebsites.net/api/Auth/register", {
+        fetch("https://studentrentapi.azurewebsites.net/api/Auth/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
