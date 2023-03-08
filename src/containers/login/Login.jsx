@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setTokens } from '../login/authSlice.js';
+import { setUserInfo } from '../login/userSlice.js';
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -13,10 +17,12 @@ const Login = () => {
     };
 
     const handleLogin = () => {
-        fetch("https://studentrentapi20230210185810.azurewebsites.net/api/Auth/login", {
-            method: "POST",
+        const apiUrl = 'https://studentrentapi.azurewebsites.net/api/Auth/login';
+
+        fetch(apiUrl, {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 email: email,
@@ -24,14 +30,27 @@ const Login = () => {
             }),
         })
             .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Login failed");
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Login failed');
                 }
-                return response.text();
             })
             .then((data) => {
                 console.log(data);
-                // handle successful login here
+                const { accessToken, refreshToken } = data;
+                dispatch(setTokens({ accessToken, refreshToken }));
+                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('refreshToken', refreshToken);
+                dispatch(
+                    setUserInfo({
+                        id: data.id,
+                        email: data.email,
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        accountType: data.accountType,
+                    })
+                );
             })
             .catch((error) => {
                 console.error(error);
@@ -39,8 +58,9 @@ const Login = () => {
             });
     };
 
+
     const handleForgotPassword = () => {
-        console.log("Forgot password clicked");
+        console.log('Forgot password clicked');
     };
 
     return (
