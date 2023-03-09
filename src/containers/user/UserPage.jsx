@@ -18,7 +18,7 @@ const UserPage = () => {
     if (user.id === null) {
       navigate(`/login`);
     }
-  }, [user]);
+  }, [user.id, navigate, userId]);
 
   return <div>{user.id}</div>;
 };

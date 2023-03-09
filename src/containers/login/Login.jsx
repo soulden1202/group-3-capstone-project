@@ -29,7 +29,7 @@ const Login = () => {
     if (user.id !== null) {
       navigate("/");
     }
-  }, []);
+  }, [user.id, navigate]);
 
   const handleLogin = () => {
     const apiUrl = "https://studentrentapi.azurewebsites.net/api/Auth/login";
