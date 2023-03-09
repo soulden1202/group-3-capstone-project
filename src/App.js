@@ -8,26 +8,27 @@ import LoginPage from "./containers/login/Login";
 import PropertyPage from "./containers/property/Property";
 import AboutPage from "./containers/about/About";
 import SignupPage from "./containers/signup/Signup";
-
+import UserPage from "./containers/user/UserPage";
 
 import { NavBar } from "./components";
 import store from "./containers/login/store";
 
 const App = () => {
-    return (
-        <Provider store={store}>
-            <NavBar className="flex relative w-full "></NavBar>
+  return (
+    <Provider store={store}>
+      <NavBar className="flex relative w-full "></NavBar>
 
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/property" element={<PropertyPage />} />
-                <Route path="/signup" element={<SignupPage />} />
-            </Routes>
-        </Provider>
-    );
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/property" element={<PropertyPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route exact path="/user/:userId" element={<UserPage />} />
+      </Routes>
+    </Provider>
+  );
 };
 
 export default App;
