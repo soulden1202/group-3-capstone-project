@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setTokens } from '../login/authSlice.js';
 import { setUserInfo } from '../login/userSlice.js';
+import { IsLoggedIn } from '../login/IsLoggedIn.js';
 
 const Login = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const isLoggedIn = IsLoggedIn();
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -58,9 +60,12 @@ const Login = () => {
             });
     };
 
-
     const handleForgotPassword = () => {
         console.log('Forgot password clicked');
+    };
+
+    const handleCheckLoggedIn = () => {
+        console.log(`User is logged in: ${isLoggedIn}`);
     };
 
     return (
@@ -99,6 +104,12 @@ const Login = () => {
                         >
                             Forgot Password
                         </button>
+                        <button
+                            className="text-gray-600 hover:text-gray-700"
+                            onClick={handleCheckLoggedIn}
+                        >
+                             Am I logged in?
+                        </button>
                     </div>
                 </div>
             </div>
@@ -107,3 +118,7 @@ const Login = () => {
 };
 
 export default Login;
+
+    
+
+    
