@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
+
+import { useSelector } from "react-redux";
 
 import "./adjust.css";
 
 export const PropertyDetailModal = ({ homeData }) => {
   const [open, setopen] = useState(false);
+  const [disable, setdisable] = useState(true);
+
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user.id !== null) setdisable(false);
+    if (user.id === null) setdisable(true);
+  }, [user.id, disable]);
 
   let images = [];
   homeData.otherImages.forEach((image) => {
@@ -27,9 +37,9 @@ export const PropertyDetailModal = ({ homeData }) => {
       {open === true && (
         <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-full">
           <div className="flex relative w-full h-full ">
-            <div className="relative w-full bg-white rounded-lg shadow dark:bg-gray-800">
+            <div className="relative w-full bg-white rounded-lg shadow ">
               <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-semibold text-gray-900">
                   Details Information
                 </h3>
                 <button
@@ -67,14 +77,33 @@ export const PropertyDetailModal = ({ homeData }) => {
                 </div>
                 <div className="flex flex-col w-full items-center">
                   <div className="flex flex-row space-x-5 items-center justify-center right-5 mt-[4%] w-ful">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ">
-                      Contact
-                    </button>
-                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                      Add to watch list
-                    </button>
+                    {disable ? (
+                      <>
+                        <button
+                          class="bg-gray-500  text-white font-bold py-2 px-4"
+                          disabled={true}
+                        >
+                          Contact
+                        </button>
+                        <button
+                          disabled={true}
+                          class="bg-gray-500  text-white font-bold py-2 px-4"
+                        >
+                          Add to watch list
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                          Contact
+                        </button>
+                        <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                          Add to watch list
+                        </button>
+                      </>
+                    )}
                   </div>
-                  <div className="flex flex-row justify-between items-center ml-[10%] mt-[2%] w-full lg:w-[30%] text-white ">
+                  <div className="flex flex-row justify-between items-center ml-[10%] mt-[2%] w-full lg:w-[30%] text-black ">
                     <div className="flex flex-col w-[50%] justify-center text-left">
                       <p>Address:</p>
                       <p>{homeData.address}</p>

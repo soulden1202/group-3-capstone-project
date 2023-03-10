@@ -18,6 +18,7 @@ const Property = () => {
   const [isLoading, setisLoading] = useState(false);
   const [center, setcenter] = useState({});
   const [position, setpostion] = useState({});
+  const [latlng, setlatlng] = useState([]);
 
   const search = async () => {
     console.log(address, city, state, zipCode);
@@ -35,7 +36,7 @@ const Property = () => {
       },
     }).then((res) => {
       sethomeData(res.data);
-      setisLoading(false);
+      setLatandlng(res.data);
     });
   };
 
@@ -52,7 +53,6 @@ const Property = () => {
 
   const onCardSelected = (address, city, state, zipCode) => {
     var searhAdress = `${address}, ${city}, ${state.toUpperCase()}, ${zipCode}`;
-    console.log(searhAdress);
     Geocode.fromAddress(searhAdress).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
@@ -65,6 +65,35 @@ const Property = () => {
         setpostion({});
       }
     );
+  };
+
+  const setLatandlng = (data) => {
+    data.forEach(async (home) => {
+      var searhAdress = `${home.address}, ${
+        home.city
+      }, ${home.state.toUpperCase()}, ${home.zipCode}`;
+
+      console.log(searhAdress);
+      await Geocode.fromAddress(searhAdress).then(
+        (response) => {
+          const { lat, lng } = response.results[0].geometry.location;
+
+          setlatlng((prevState) => [
+            ...prevState,
+            {
+              lat: lat,
+              lng: lng,
+            },
+          ]);
+        },
+
+        (error) => {
+          console.error(error);
+        }
+      );
+    });
+    console.log(latlng);
+    setisLoading(false);
   };
 
   const containerStyle = {
@@ -217,6 +246,9 @@ const Property = () => {
                 zoom={15}
               >
                 <Marker position={position} />
+                {latlng.map((pos, key) => (
+                  <Marker opacity={0.4} position={pos} />
+                ))}
               </GoogleMap>
             </LoadScript>
           </div>

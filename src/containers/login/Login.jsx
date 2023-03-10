@@ -7,11 +7,13 @@ import { IsLoggedIn } from "../login/IsLoggedIn.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { BallTriangle } from "react-loader-spinner";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setloading] = useState(false);
   const isLoggedIn = IsLoggedIn();
   let navigate = useNavigate();
 
@@ -34,6 +36,7 @@ const Login = () => {
   const handleLogin = () => {
     const apiUrl = "https://studentrentapi.azurewebsites.net/api/Auth/login";
 
+    setloading(true);
     fetch(apiUrl, {
       method: "POST",
       headers: {
@@ -71,6 +74,7 @@ const Login = () => {
             accountType: data.accounttype,
           })
         );
+        setloading(false);
         navigate("/");
       })
       .catch((error) => {
@@ -91,45 +95,64 @@ const Login = () => {
     <div className="flex h-screen bg-gray-100">
       <div className="m-auto w-96">
         <div className="bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-3xl font-semibold mb-4">Log In</h2>
-          <div className="space-y-4">
-            <label className="block">
-              <span className="text-gray-700">Email:</span>
-              <input
-                type="text"
-                value={email}
-                onChange={handleEmailChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Password:</span>
-              <input
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              />
-            </label>
-            <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-              onClick={handleLogin}
-            >
-              Log In
-            </button>
-            <button
-              className="text-gray-600 hover:text-gray-700"
-              onClick={handleForgotPassword}
-            >
-              Forgot Password
-            </button>
-            <button
-              className="text-gray-600 hover:text-gray-700"
-              onClick={handleCheckLoggedIn}
-            >
-              Am I logged in?
-            </button>
-          </div>
+          {!loading ? (
+            <>
+              <h2 className="text-3xl font-semibold mb-4">Log In</h2>
+              <div className="space-y-4">
+                <label className="block">
+                  <span className="text-gray-700">Email:</span>
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={handleEmailChange}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700">Password:</span>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                  />
+                </label>
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                  onClick={handleLogin}
+                >
+                  Log In
+                </button>
+                <button
+                  className="text-gray-600 hover:text-gray-700"
+                  onClick={handleForgotPassword}
+                >
+                  Forgot Password
+                </button>
+                <button
+                  className="text-gray-600 hover:text-gray-700"
+                  onClick={handleCheckLoggedIn}
+                >
+                  Am I logged in?
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex w-full h-full items-center justify-center">
+                <BallTriangle
+                  height={100}
+                  width={100}
+                  radius={4}
+                  color="#ADD8E6"
+                  ariaLabel="ball-triangle-loading"
+                  wrapperClass={{}}
+                  wrapperStyle=""
+                  visible={true}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
