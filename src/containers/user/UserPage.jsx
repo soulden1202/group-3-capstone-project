@@ -18,7 +18,9 @@ const UserPage = () => {
     if (user.id === null) {
       navigate(`/login`);
     }
-  }, [user.id, navigate, userId]);
+
+    document.title = `${user.firstName} ${user.lastName} - Livin it`;
+  }, [user.id, navigate, userId, user.firstName, user.lastName]);
 
   return <div>{user.id}</div>;
 };

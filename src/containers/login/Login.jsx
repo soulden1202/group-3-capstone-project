@@ -31,6 +31,8 @@ const Login = () => {
     if (user.id !== null) {
       navigate("/");
     }
+
+    document.title = "Login - Livin it";
   }, [user.id, navigate]);
 
   const handleLogin = () => {

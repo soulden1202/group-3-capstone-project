@@ -10,6 +10,7 @@ import { clearAuth } from "../../containers/login/authSlice";
 import { clearUserInfo } from "../../containers/login/userSlice";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import logo from "../../assets/logo.jpeg";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
@@ -29,7 +30,16 @@ const Navbar = () => {
 
   return (
     <nav className="stroke flex relative w-full h-[4rem] bg-white items-center text-center justify-between shadow-md">
-      <div className="ml-5">Livin It</div>
+      <div
+        className="flex ml-5 h-full items-center cursor-pointer"
+        onClick={() => navigate("/")}
+      >
+        <img
+          src={logo}
+          alt="logo"
+          className="object-cover h-10 w-10 rounded-lg "
+        />
+      </div>
       <ul className=" flex-row mr-5 lg:mr-[10rem] space-x-11 lg:flex hidden">
         <li>
           <Link to="/" className="">
