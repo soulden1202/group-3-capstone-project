@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ContactUs = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    document.title = "Contact - Livin it";
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();

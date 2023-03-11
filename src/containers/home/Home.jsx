@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Home.css";
 
 const Home = () => {
@@ -13,6 +13,9 @@ const Home = () => {
 
     console.log(countries.filter((entry) => entry.name === searchQuery));
   };
+  useEffect(() => {
+    document.title = "Home - Livin it";
+  }, []);
 
   //temp data below to test out the search bar
   const countries = [

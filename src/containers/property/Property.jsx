@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PropertyCard } from "./PropertyCard";
 import axios from "axios";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
@@ -19,6 +19,10 @@ const Property = () => {
   const [center, setcenter] = useState({});
   const [position, setpostion] = useState({});
   const [latlng, setlatlng] = useState([]);
+
+  useEffect(() => {
+    document.title = "Property - Livin it";
+  }, []);
 
   const search = async () => {
     console.log(address, city, state, zipCode);
