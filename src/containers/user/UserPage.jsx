@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UploadProperty from "../property/UploadProperty.jsx";
 
 const UserPage = () => {
     let navigate = useNavigate();
