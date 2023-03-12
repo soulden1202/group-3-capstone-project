@@ -66,14 +66,14 @@ const Login = () => {
         localStorage.setItem("firstName", data.firstname);
         localStorage.setItem("lastName", data.lastname);
         localStorage.setItem("email", data.email);
-        localStorage.setItem("accountType", data.accounttype);
+          localStorage.setItem("accountType", data.accountType);
         dispatch(
           setUserInfo({
             id: data.id,
             email: data.email,
             firstName: data.firstname,
             lastName: data.lastname,
-            accountType: data.accounttype,
+              accountType: data.accountType,
           })
         );
         setloading(false);
