@@ -37,8 +37,7 @@ const Signup = () => {
       headers: {
         "Content-Type": "application/json",
       },
-        body: JSON.stringify({
-        ID: "ignore this",
+      body: JSON.stringify({
         FirstName: firstName,
         LastName: lastName,
         email: email,
@@ -55,13 +54,15 @@ const Signup = () => {
       .then((data) => {
         console.log(data);
         if (data.includes("Account created and added to Firestore")) {
-          
+          // handle successful signup here
         } else {
+          // handle signup error here
           console.log("Signup failed");
         }
       })
       .catch((error) => {
         console.error(error);
+        // handle signup error here
       });
   };
 
