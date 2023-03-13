@@ -2,7 +2,6 @@
     cursor: pointer;
     border-radius: 0 30px 30px 0;
     font-family: Arial, sans-serif;
-
 }
 
 input {
@@ -15,3 +14,4 @@ input {
 html {
     height: 100%;
 }
+
