@@ -64,7 +64,6 @@ const Signup = () => {
           setsuccess(true);
         }
       })
-
       .catch((error) => {
         console.error(error);
       });
