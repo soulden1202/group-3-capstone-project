@@ -119,6 +119,16 @@ export const PropertyDetailModal = ({ homeData }) => {
                       <p>Price: ${homeData.price}</p>
                     </div>
                   </div>
+                  {user.accountType === "Renter" && (
+                    <div className="flex items-center">
+                      <button
+                        disabled={!user.isSubscripted}
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
+                      >
+                        See Listing From Same Owner
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
