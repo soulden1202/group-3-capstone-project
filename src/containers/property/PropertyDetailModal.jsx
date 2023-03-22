@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
+import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
 import "./adjust.css";
 
-export const PropertyDetailModal = ({ homeData }) => {
+export const PropertyDetailModal = ({ homeData, withId }) => {
   const [open, setopen] = useState(false);
   const [disable, setdisable] = useState(true);
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
 
@@ -119,15 +121,24 @@ export const PropertyDetailModal = ({ homeData }) => {
                       <p>Price: ${homeData.price}</p>
                     </div>
                   </div>
-                  {user.accountType === "Renter" && (
-                    <div className="flex items-center">
-                      <button
-                        disabled={!user.isSubscripted}
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-                      >
-                        See Listing From Same Owner
-                      </button>
-                    </div>
+                  {withId === true ? (
+                    <></>
+                  ) : (
+                    <>
+                      {user.accountType === "Renter" && (
+                        <div className="flex items-center">
+                          <button
+                            // disabled={!user.isSubscripted}
+                            onClick={() =>
+                              navigate(`/property/${homeData.accountId}`)
+                            }
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
+                          >
+                            See Listing From Same Owner
+                          </button>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               </div>
