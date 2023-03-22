@@ -9,6 +9,7 @@ import PropertyPage from "./containers/property/Property";
 import AboutPage from "./containers/about/About";
 import SignupPage from "./containers/signup/Signup";
 import UserPage from "./containers/user/UserPage";
+import PropretyById from "./containers/property/PropretyById";
 import UploadProperty from "./containers/property/UploadProperty";
 import { NavBar } from "./components";
 import store from "./containers/login/store";
@@ -18,17 +19,21 @@ const App = () => {
     <Provider store={store}>
       <NavBar className="flex relative w-full "></NavBar>
 
-    <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/property" element={<PropertyPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route exact path="/user/:userId" element={<UserPage />} />
-          <Route exact path="/user/:userId/UploadProperty" element={<UploadProperty />} />
-     </Routes>
-
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/property" element={<PropertyPage />} />
+        <Route exact path="/property/:userId" element={<PropretyById />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route exact path="/user/:userId" element={<UserPage />} />
+        <Route
+          exact
+          path="/user/:userId/UploadProperty"
+          element={<UploadProperty />}
+        />
+      </Routes>
     </Provider>
   );
 };

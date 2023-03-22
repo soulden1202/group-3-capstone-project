@@ -8,7 +8,7 @@ import Geocode from "react-geocode";
 const Property = () => {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
   const searchUrl =
-    "https://studentrentapi.azurewebsites.net/api/Property/Search";
+    "http://studentrentapi.azurewebsites.net/api/Property/Search";
 
   const [address, setaddress] = useState("");
   const [city, setcity] = useState("");
@@ -107,7 +107,7 @@ const Property = () => {
 
   return (
     <div className="flex flex-col fixed w-full h-full ">
-      <div className="flex items-center my-2 w-full">
+      <div className="flex items-center my-2 w-full ">
         <div className="flex space-x-1 w-[100%] md:w-[40%]">
           <input
             type="text"
@@ -209,7 +209,7 @@ const Property = () => {
         </div>
       </div>
       <div className="flex md:flex-row flex-col w-full h-full ">
-        <div className="flex w-full md:w-[40%] h-full flex-col overflow-y-auto">
+        <div className="flex w-full md:w-[40%] h-[100%] flex-col overflow-y-scroll">
           {isLoading && (
             <div className="flex w-full h-full items-center justify-center">
               <BallTriangle
@@ -224,15 +224,17 @@ const Property = () => {
               />
             </div>
           )}
-          {homeData.length > 0 &&
-            !isLoading &&
-            homeData.map((value, key) => (
-              <PropertyCard
-                homeData={value}
-                key={value.propertyId}
-                onCardSelected={onCardSelected}
-              />
-            ))}
+          {homeData.length > 0 && !isLoading && (
+            <div>
+              {homeData.map((value, key) => (
+                <PropertyCard
+                  homeData={value}
+                  key={value.propertyId}
+                  onCardSelected={onCardSelected}
+                />
+              ))}
+            </div>
+          )}
           {!isLoading && homeData.length === 0 && (
             <div className="flex justify-center items-center h-full">
               No data to show

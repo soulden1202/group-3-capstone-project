@@ -15,7 +15,7 @@ import logo from "../../assets/logo.jpeg";
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
