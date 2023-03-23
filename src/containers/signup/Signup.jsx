@@ -38,20 +38,23 @@ const Signup = () => {
   const handleSignup = () => {
     setloading(true);
     setdataReturned(false);
-    fetch("https://studentrentapi.azurewebsites.net/api/Auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ID: "ignore this",
-        FirstName: firstName,
-        LastName: lastName,
-        email: email,
-        password: password,
-        AccountType: accountType,
-      }),
-    })
+    fetch(
+      "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ID: "ignore this",
+          FirstName: firstName,
+          LastName: lastName,
+          email: email,
+          password: password,
+          AccountType: accountType,
+        }),
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           setloading(false);

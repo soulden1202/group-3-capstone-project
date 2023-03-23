@@ -8,10 +8,10 @@ import { useParams } from "react-router-dom";
 
 const PropretyById = () => {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
-  //   const searchUrl =
-  //     "https://studentrentapi.azurewebsites.net/api/Property/SearchById";
+  const searchUrl =
+    "https://studentrentapi20230322222647.azurewebsites.net/api/Property/SearchById";
 
-  const searchUrl = "https://localhost:49159/api/Property/SearchById";
+  //const searchUrl = "https://localhost:49159/api/Property/SearchById";
   const [homeData, sethomeData] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [center, setcenter] = useState({});
@@ -103,10 +103,9 @@ const PropretyById = () => {
   };
 
   return (
-    <div className="flex flex-col fixed w-full h-full ">
-      <div className="flex items-center my-2 w-full"></div>
+    <div className="flex fixed w-full h-full ">
       <div className="flex md:flex-row flex-col w-full h-full ">
-        <div className="flex w-full md:w-[40%] h-full flex-col overflow-y-auto">
+        <div className="flex w-full md:w-[40%] h-[100%] flex-col overflow-y-scroll">
           {isLoading && (
             <div className="flex w-full h-full items-center justify-center">
               <BallTriangle
@@ -128,6 +127,7 @@ const PropretyById = () => {
                   homeData={value}
                   key={value.propertyId}
                   onCardSelected={onCardSelected}
+                  withId={true}
                 />
               ))}
             </div>
