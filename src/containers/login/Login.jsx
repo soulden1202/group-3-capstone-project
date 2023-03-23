@@ -36,7 +36,8 @@ const Login = () => {
   }, [user.id, navigate]);
 
   const handleLogin = () => {
-    const apiUrl = "https://studentrentapi.azurewebsites.net/api/Auth/login";
+    const apiUrl =
+      "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
 
     setloading(true);
     fetch(apiUrl, {
@@ -58,6 +59,10 @@ const Login = () => {
       })
       .then((data) => {
         console.log(data);
+
+        //Todo: Check if user has subcription or subscription expired
+        //Todo: If expired then send a request to adjust account infor accordingly
+
         const { accessToken, refreshToken } = data;
         dispatch(setTokens({ accessToken, refreshToken }));
         localStorage.setItem("accessToken", accessToken);
@@ -66,14 +71,18 @@ const Login = () => {
         localStorage.setItem("firstName", data.firstname);
         localStorage.setItem("lastName", data.lastname);
         localStorage.setItem("email", data.email);
-          localStorage.setItem("accountType", data.accountType);
+        localStorage.setItem("accountType", data.accountType);
+        localStorage.setItem("isSubscripted", data.isSubscripted);
+        localStorage.setItem("endOfSubscription", data.endOfSubscription);
         dispatch(
           setUserInfo({
             id: data.id,
             email: data.email,
             firstName: data.firstname,
             lastName: data.lastname,
-              accountType: data.accountType,
+            accountType: data.accountType,
+            isSubscripted: data.isSubscripted,
+            endOfSubscription: data.endOfSubscription,
           })
         );
         setloading(false);

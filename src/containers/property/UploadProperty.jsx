@@ -80,7 +80,7 @@ const UploadProperty = () => {
 
     try {
       const response = await fetch(
-        "https://studentrentapi.azurewebsites.net/api/Property/Add",
+        "https://studentrentapi20230322222647.azurewebsites.net/api/Property/Add",
         {
           method: "POST",
           body: formData,
