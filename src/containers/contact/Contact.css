@@ -1,0 +1,7 @@
+.page-background {    display: flex;    
+     background-size: cover;    background-position: center;   
+      height: 100vh; /* Set the height to fill the entire viewport */    
+      justify-content: center;    
+      filter: brightness(100%) contrast(100%);}
+
+     
