@@ -180,7 +180,7 @@ const Signup = () => {
                     type="button"
                     onClick={handleSignup}
                   >
-                    Sign Up
+                    Sign Up:
                   </button>
                 )}
               </div>
