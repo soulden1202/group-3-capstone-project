@@ -39,7 +39,8 @@ const Signup = () => {
     setloading(true);
     setdataReturned(false);
     fetch(
-      "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register",
+      // "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register",
+      "https://localhost:7228/api/Auth/register",
       {
         method: "POST",
         headers: {

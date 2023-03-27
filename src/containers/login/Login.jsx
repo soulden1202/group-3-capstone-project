@@ -36,8 +36,10 @@ const Login = () => {
   }, [user.id, navigate]);
 
   const handleLogin = () => {
-    const apiUrl =
-      "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
+    // const apiUrl =
+    //   "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
+
+    const apiUrl = "https://localhost:7228/api/Auth/login";
 
     setloading(true);
     fetch(apiUrl, {
