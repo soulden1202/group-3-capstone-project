@@ -70,21 +70,19 @@ const Login = () => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("id", data.id);
-        localStorage.setItem("firstName", data.firstname);
-        localStorage.setItem("lastName", data.lastname);
+        localStorage.setItem("firstName", data.firstName);
+        localStorage.setItem("lastName", data.lastName);
         localStorage.setItem("email", data.email);
         localStorage.setItem("accountType", data.accountType);
-        localStorage.setItem("isSubscripted", data.isSubscripted);
-        localStorage.setItem("endOfSubscription", data.endOfSubscription);
+        localStorage.setItem("user", data.user);
         dispatch(
           setUserInfo({
             id: data.id,
             email: data.email,
-            firstName: data.firstname,
-            lastName: data.lastname,
+            firstName: data.firstName,
+            lastName: data.lastName,
             accountType: data.accountType,
-            isSubscripted: data.isSubscripted,
-            endOfSubscription: data.endOfSubscription,
+            user: data.user,
           })
         );
         setloading(false);
