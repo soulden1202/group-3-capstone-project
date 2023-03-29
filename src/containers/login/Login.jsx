@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { BallTriangle } from "react-loader-spinner";
 
+import { logInWithEmailAndPassword } from "../../firebase/firebaseClient.jsx";
+
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -40,6 +42,8 @@ const Login = () => {
     //   "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
 
     const apiUrl = "https://localhost:7228/api/Auth/login";
+
+    logInWithEmailAndPassword(email, password);
 
     setloading(true);
     fetch(apiUrl, {
