@@ -45,6 +45,10 @@ const Login = () => {
 
     logInWithEmailAndPassword(email, password);
 
+    // const apiUrl = "https://localhost:7228/api/Auth/login";
+
+    logInWithEmailAndPassword(email, password);
+
     setloading(true);
     fetch(apiUrl, {
       method: "POST",
