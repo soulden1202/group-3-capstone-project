@@ -1,17 +1,2 @@
-.submit {
-    cursor: pointer;
-    border-radius: 0 30px 30px 0;
-    font-family: Arial, sans-serif;
-}
 
-input {
-    width: 500px;
-    height: 40px;
-    border-radius: 30px 30px 30px 30px;
-    text-align: center;
-}
-
-html {
-    height: 100%;
-}
 

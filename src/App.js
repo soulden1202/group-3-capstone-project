@@ -13,12 +13,15 @@ import UploadProperty from "./containers/property/UploadProperty";
 import { NavBar } from "./components";
 import store from "./containers/login/store";
 
+
+
 const App = () => {
   return (
     <Provider store={store}>
       <NavBar className="flex relative w-full "></NavBar>
 
     <Routes>
+
           <Route path="/" element={<HomePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
