@@ -39,6 +39,10 @@ const Login = () => {
     const apiUrl =
       "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
 
+    // const apiUrl = "https://localhost:7228/api/Auth/login";
+
+    logInWithEmailAndPassword(email, password);
+
     setloading(true);
     fetch(apiUrl, {
       method: "POST",
