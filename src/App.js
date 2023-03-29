@@ -11,6 +11,7 @@ import SignupPage from "./containers/signup/Signup";
 import UserPage from "./containers/user/UserPage";
 import PropretyById from "./containers/property/PropretyById";
 import UploadProperty from "./containers/property/UploadProperty";
+import Pricing from "./containers/pricing/Pricing";
 import { NavBar } from "./components";
 import store from "./containers/login/store";
 
@@ -28,6 +29,7 @@ const App = () => {
         <Route exact path="/property/:userId" element={<PropretyById />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route exact path="/user/:userId" element={<UserPage />} />
+        <Route path="/pricing" element={<Pricing />} />
         <Route
           exact
           path="/user/:userId/UploadProperty"

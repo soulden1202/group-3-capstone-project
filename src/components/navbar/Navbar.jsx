@@ -11,6 +11,7 @@ import { clearUserInfo } from "../../containers/login/userSlice";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import logo from "../../assets/logo.jpeg";
+import { logout } from "../../firebase/firebaseClient";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
@@ -25,6 +26,7 @@ const Navbar = () => {
     navigate("/login");
     dispatch(clearAuth());
     dispatch(clearUserInfo());
+    logout();
     localStorage.clear();
   };
 
@@ -53,7 +55,10 @@ const Navbar = () => {
           <Link to="/property">Property</Link>
         </li>
         <li>
-          <Link to="/contact">contact</Link>
+          <Link to="/contact">Contact</Link>
+        </li>
+        <li>
+          <Link to="/pricing">Pricing</Link>
         </li>
 
         {user.id === null ? (
@@ -147,6 +152,19 @@ const Navbar = () => {
                       )}
                     >
                       Contact
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      to="/pricing"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm"
+                      )}
+                    >
+                      Pricing
                     </Link>
                   )}
                 </Menu.Item>
