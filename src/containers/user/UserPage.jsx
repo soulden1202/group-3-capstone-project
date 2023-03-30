@@ -9,13 +9,7 @@ const UserPage = () => {
     const { userId } = useParams();
     const user = useSelector((state) => state.user);
     const [loading, setLoading] = useState(true);
-    const withId = (WrappedComponent) => {
-        const ComponentWithId = (props) => {
-            const { id } = useParams();
-            return <WrappedComponent {...props} id={id} />;
-        };
-        return ComponentWithId;
-    };
+    
 
     useEffect(() => {
         if (user.id !== null && user.id !== userId) {

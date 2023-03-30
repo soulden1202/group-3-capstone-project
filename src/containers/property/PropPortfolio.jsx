@@ -52,10 +52,10 @@ const PropPortfolio = () => {
         var searhAdress = `${address}, ${city}, ${state.toUpperCase()}, ${zipCode}`;
         Geocode.fromAddress(searhAdress).then(
             (response) => {
-                const { lat, lng } = response.results[0].geometry.location;
-                const center = { lat: lat, lng: lng };
-                const position = { lat: lat, lng: lng };
-                console.log(center, position);
+                //const { lat, lng } = response.results[0].geometry.location;
+                //const center = { lat: lat, lng: lng };
+                //const position = { lat: lat, lng: lng };
+               // console.log(center, position);
             },
             (error) => {
                 console.error(error);
