@@ -8,8 +8,7 @@ const userSlice = createSlice({
     firstName: localStorage.getItem("firstName"),
     email: localStorage.getItem("email"),
     accountType: localStorage.getItem("accountType"),
-    isSubscripted: localStorage.getItem("isSubscripted"),
-    endOfSubscription: localStorage.getItem("endOfSubscription"),
+    user: localStorage.getItem("user"),
   },
   reducers: {
     setUserInfo(state, action) {
@@ -18,8 +17,7 @@ const userSlice = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.accountType = action.payload.accountType;
-      state.isSubscripted = action.payload.isSubscripted;
-      state.endOfSubscription = action.payload.endOfSubscription;
+      state.user = action.payload.user;
     },
     clearUserInfo(state) {
       state.id = null;
@@ -27,8 +25,7 @@ const userSlice = createSlice({
       state.firstName = null;
       state.lastName = null;
       state.accountType = null;
-      state.isSubscripted = null;
-      state.endOfSubscription = null;
+      state.user = null;
     },
   },
 });

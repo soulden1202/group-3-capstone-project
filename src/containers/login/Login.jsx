@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { BallTriangle } from "react-loader-spinner";
 
+import { logInWithEmailAndPassword } from "../../firebase/firebaseClient.jsx";
+
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -39,6 +41,14 @@ const Login = () => {
     const apiUrl =
       "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
 
+    //const apiUrl = "https://localhost:7228/api/Auth/login";
+
+    logInWithEmailAndPassword(email, password);
+
+    // const apiUrl = "https://localhost:7228/api/Auth/login";
+
+    logInWithEmailAndPassword(email, password);
+
     setloading(true);
     fetch(apiUrl, {
       method: "POST",
@@ -68,21 +78,19 @@ const Login = () => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("id", data.id);
-        localStorage.setItem("firstName", data.firstname);
-        localStorage.setItem("lastName", data.lastname);
+        localStorage.setItem("firstName", data.firstName);
+        localStorage.setItem("lastName", data.lastName);
         localStorage.setItem("email", data.email);
         localStorage.setItem("accountType", data.accountType);
-        localStorage.setItem("isSubscripted", data.isSubscripted);
-        localStorage.setItem("endOfSubscription", data.endOfSubscription);
+        localStorage.setItem("user", data.user);
         dispatch(
           setUserInfo({
             id: data.id,
             email: data.email,
-            firstName: data.firstname,
-            lastName: data.lastname,
+            firstName: data.firstName,
+            lastName: data.lastName,
             accountType: data.accountType,
-            isSubscripted: data.isSubscripted,
-            endOfSubscription: data.endOfSubscription,
+            user: data.user,
           })
         );
         setloading(false);

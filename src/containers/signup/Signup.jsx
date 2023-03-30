@@ -35,10 +35,44 @@ const Signup = () => {
     setAccountType(event.target.value);
   };
 
-    const handleSignup = () => {
-        if (accountType === "") {
+
+  const handleSignup = () => {
+    setloading(true);
+    setdataReturned(false);
+    if (accountType === "") {
             seterror("Must Select Account Type");
             return;
+    fetch(
+
+      "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register",
+      // "https://localhost:7228/api/Auth/register",
+
+
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ID: "ignore this",
+          FirstName: firstName,
+          LastName: lastName,
+          email: email,
+          password: password,
+          AccountType: accountType,
+        }),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          setloading(false);
+          seterror("Account Already Exists");
+          setdataReturned(true);
+          setsuccess(false);
+        } else {
+          setloading(false);
+          setdataReturned(true);
+          setsuccess(true);
         }
 
         setloading(true);

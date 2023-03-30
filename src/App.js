@@ -12,6 +12,7 @@ import UserPage from "./containers/user/UserPage";
 import PropretyById from "./containers/property/PropretyById";
 import UploadProperty from "./containers/property/UploadProperty";
 import PropPortfolio from "./containers/property/PropPortfolio";
+import Pricing from "./containers/pricing/Pricing";
 import { NavBar } from "./components";
 import store from "./containers/login/store";
 
@@ -30,6 +31,7 @@ const App = () => {
                 <Route exact path="/user/:userId/PropPortfolio" element={<PropPortfolio />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route exact path="/user/:userId" element={<UserPage />} />
+                <Route path="/pricing" element={<Pricing />} />
                 <Route
                     exact
                     path="/user/:userId/UploadProperty"
@@ -38,6 +40,7 @@ const App = () => {
             </Routes>
         </Provider>
     );
+
 };
 
 export default App;
