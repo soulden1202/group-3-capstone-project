@@ -70,7 +70,7 @@ const PropPortfolio = () => {
 
             await Geocode.fromAddress(searhAdress).then(
                 (response) => {
-                    const { lat, lng } = response.results[0].geometry.location;
+                    
                 },
 
                 (error) => {

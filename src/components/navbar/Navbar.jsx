@@ -11,7 +11,6 @@ import { clearUserInfo } from "../../containers/login/userSlice";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import logo from "../../assets/logo.jpeg";
-import { logout } from "../../firebase/firebaseClient";
 
 const Navbar = () => {
     const user = useSelector((state) => state.user);
