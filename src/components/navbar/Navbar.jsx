@@ -21,12 +21,14 @@ const Navbar = () => {
     return classes.filter(Boolean).join(" ");
   }
 
-  const handleLogout = () => {
-    navigate("/login");
-    dispatch(clearAuth());
-    dispatch(clearUserInfo());
-    localStorage.clear();
-  };
+    const handleLogout = () => {
+        dispatch(clearAuth());
+        dispatch(clearUserInfo());
+        localStorage.clear();
+        navigate(user.id ? "/" : "/login");
+        window.location.reload();
+    };
+
 
   return (
     <nav className="stroke flex relative w-full h-[4rem] bg-white items-center text-center justify-between shadow-md">

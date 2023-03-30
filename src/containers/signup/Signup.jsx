@@ -35,42 +35,49 @@ const Signup = () => {
     setAccountType(event.target.value);
   };
 
-  const handleSignup = () => {
-    setloading(true);
-    setdataReturned(false);
-    fetch(
-      "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ID: "ignore this",
-          FirstName: firstName,
-          LastName: lastName,
-          email: email,
-          password: password,
-          AccountType: accountType,
-        }),
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          setloading(false);
-          seterror("Account Already Exists");
-          setdataReturned(true);
-          setsuccess(false);
-        } else {
-          setloading(false);
-          setdataReturned(true);
-          setsuccess(true);
+    const handleSignup = () => {
+        if (accountType === "") {
+            seterror("Must Select Account Type");
+            return;
         }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+
+        setloading(true);
+        setdataReturned(false);
+
+        fetch(
+            "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ID: "ignore this",
+                    FirstName: firstName,
+                    LastName: lastName,
+                    email: email,
+                    password: password,
+                    AccountType: accountType,
+                }),
+            }
+        )
+            .then((response) => {
+                if (!response.ok) {
+                    setloading(false);
+                    seterror("Account Already Exists");
+                    setdataReturned(true);
+                    setsuccess(false);
+                } else {
+                    setloading(false);
+                    setdataReturned(true);
+                    setsuccess(true);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
 
   return (
     <div className="flex justify-center mt-20">

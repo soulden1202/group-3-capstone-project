@@ -9,6 +9,13 @@ const UserPage = () => {
     const { userId } = useParams();
     const user = useSelector((state) => state.user);
     const [loading, setLoading] = useState(true);
+    const withId = (WrappedComponent) => {
+        const ComponentWithId = (props) => {
+            const { id } = useParams();
+            return <WrappedComponent {...props} id={id} />;
+        };
+        return ComponentWithId;
+    };
 
     useEffect(() => {
         if (user.id !== null && user.id !== userId) {
@@ -25,6 +32,7 @@ const UserPage = () => {
 
     const isPropertyOwner = user.accountType === "Property Owner";
 
+
     return (
         <div>
             {loading && <p>Loading...</p>}
@@ -32,8 +40,13 @@ const UserPage = () => {
                 <div className="flex justify-center">
                     <div className="flex justify-center">
                         {isPropertyOwner && (
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded self-center mr-0" onClick={() => navigate(`./UploadProperty`)}>
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded self-center mr-4" onClick={() => navigate(`./UploadProperty`)}>
                                 Add Property
+                            </button>
+                        )}
+                        {isPropertyOwner && (
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded self-center" onClick={() => navigate(`./PropPortfolio`)}>
+                                View My Properties
                             </button>
                         )}
                     </div>
