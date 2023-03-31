@@ -38,7 +38,7 @@ const Sidenav = ({
               </div>
             </li>
             <li>
-              <a
+              <div
                 onClick={onAccountPage}
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
               >
@@ -50,12 +50,12 @@ const Sidenav = ({
                 <span className="ml-2 text-sm tracking-wide truncate">
                   Account
                 </span>
-              </a>
+              </div>
             </li>
             {(accountType === "Property Owner" || accountType === "Both") && (
               <>
                 <li>
-                  <a
+                  <div
                     onClick={onAddPropertyPage}
                     className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
                   >
@@ -70,10 +70,10 @@ const Sidenav = ({
                     {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
                 New
               </span> */}
-                  </a>
+                  </div>
                 </li>
                 <li>
-                  <a
+                  <div
                     onClick={onPropretyPage}
                     className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
                   >
@@ -88,13 +88,13 @@ const Sidenav = ({
                     {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
                 New
               </span> */}
-                  </a>
+                  </div>
                 </li>
               </>
             )}
             {(accountType === "Renter" || accountType === "Both") && (
               <li>
-                <a
+                <div
                   onClick={onWatchingListPage}
                   className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
                 >
@@ -109,11 +109,11 @@ const Sidenav = ({
                   {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
                 New
               </span> */}
-                </a>
+                </div>
               </li>
             )}
             <li>
-              <a
+              <div
                 onClick={onSubscriptionPage}
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
               >
@@ -128,7 +128,7 @@ const Sidenav = ({
                 {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
                 New
               </span> */}
-              </a>
+              </div>
             </li>
           </ul>
         </div>
@@ -143,7 +143,7 @@ const Sidenav = ({
               </div>
             </li>
             <li>
-              <a
+              <div
                 onClick={onAccountPage}
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
               >
@@ -152,12 +152,12 @@ const Sidenav = ({
                     <AiOutlineUser></AiOutlineUser>
                   </div>
                 </span>
-              </a>
+              </div>
             </li>
             {accountType === "Property Owner" && (
               <>
                 <li>
-                  <a
+                  <div
                     onClick={onAddPropertyPage}
                     className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
                   >
@@ -170,10 +170,10 @@ const Sidenav = ({
                     {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
                 New
               </span> */}
-                  </a>
+                  </div>
                 </li>
                 <li>
-                  <a
+                  <div
                     onClick={onPropretyPage}
                     className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
                   >
@@ -186,13 +186,13 @@ const Sidenav = ({
                     {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
                 New
               </span> */}
-                  </a>
+                  </div>
                 </li>
               </>
             )}
             {(accountType === "Renter" || accountType === "Both") && (
               <li>
-                <a
+                <div
                   onClick={onWatchingListPage}
                   className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
                 >
@@ -204,11 +204,11 @@ const Sidenav = ({
                   {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
                 New
               </span> */}
-                </a>
+                </div>
               </li>
             )}
             <li>
-              <a
+              <div
                 onClick={onSubscriptionPage}
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6 cursor-pointer"
               >
@@ -221,7 +221,7 @@ const Sidenav = ({
                 {/* <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
                 New
               </span> */}
-              </a>
+              </div>
             </li>
           </ul>
         </div>
