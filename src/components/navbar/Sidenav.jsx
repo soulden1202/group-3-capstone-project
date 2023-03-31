@@ -22,7 +22,7 @@ const Sidenav = ({
     <div
       className={`fixed flex flex-col left-0 ${
         isMinimized ? "w-10" : "w-64"
-      } bg-gray-100 border-t-2  h-full border-r transition`}
+      } bg-gray-100 border-t-2  h-full border-r transition z-10 `}
     >
       {!isMinimized ? (
         <div className="overflow-y-auto overflow-x-hidden flex-grow">

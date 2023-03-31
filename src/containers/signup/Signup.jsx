@@ -11,6 +11,7 @@ const Signup = () => {
   const [success, setsuccess] = useState(false);
   const [dataReturned, setdataReturned] = useState(false);
   const [error, seterror] = useState("");
+  const [isFiledEmpty, setisFiledEmpty] = useState(false);
 
   useEffect(() => {
     document.title = "Sign up - Livin it";
@@ -37,16 +38,27 @@ const Signup = () => {
   };
 
   const apiUrl =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
+    "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register";
 
-  // const apiUrl = "https://localhost:7228/api/Auth/login";
+  // const apiUrl = "https://localhost:7228/api/Auth/register";
   const handleSignup = () => {
-    setloading(true);
-    setdataReturned(false);
-    if (accountType === "") {
-      seterror("Must Select Account Type");
+    if (
+      lastName === "" ||
+      firstName === "" ||
+      email === "" ||
+      password === ""
+    ) {
+      setisFiledEmpty(true);
+      seterror("Please fill out all fields above");
+      return;
+    } else if (accountType === "") {
+      setisFiledEmpty(true);
+      seterror("Must select an Account Type");
       return;
     }
+    setloading(true);
+    setdataReturned(false);
+    setisFiledEmpty(false);
     fetch(apiUrl, {
       method: "POST",
       headers: {
@@ -72,40 +84,9 @@ const Signup = () => {
           setdataReturned(true);
           setsuccess(true);
         }
-        setloading(true);
-        setdataReturned(false);
-        return fetch(
-          "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              ID: "ignore this",
-              FirstName: firstName,
-              LastName: lastName,
-              email: email,
-              password: password,
-              AccountType: accountType,
-            }),
-          }
-        );
-      })
-      .then((response) => {
-        if (!response.ok) {
-          setloading(false);
-          seterror("Account Already Exists");
-          setdataReturned(true);
-          setsuccess(false);
-        } else {
-          setloading(false);
-          setdataReturned(true);
-          setsuccess(true);
-        }
       })
       .catch((error) => {
-        console.error(error);
+        seterror(error);
       });
   };
 
@@ -231,6 +212,9 @@ const Signup = () => {
                     <p className="text-red-500">{error}</p>
                   )}
                 </div>
+              )}
+              {!dataReturned && isFiledEmpty && (
+                <p className="text-red-500">{error}</p>
               )}
             </div>
           </fieldset>
