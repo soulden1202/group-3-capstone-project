@@ -76,6 +76,7 @@ const UserPage = () => {
       <div className="flex flex-row justify-center">
         <div>
           <SideNav
+            className="z-10"
             accountType={accountType}
             onAccountPage={onAccountPage}
             onAddPropertyPage={onAddPropertyPage}
@@ -84,7 +85,7 @@ const UserPage = () => {
             onSubscriptionPage={onSubscriptionPage}
           ></SideNav>
         </div>
-        <div>
+        <div className="w-full h-full">
           {isAccountPage && <Account></Account>}
           {isPropretyPage && <PropPortfolio></PropPortfolio>}
           {isAddPropertyPage && <UploadProperty></UploadProperty>}

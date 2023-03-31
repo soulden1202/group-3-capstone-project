@@ -126,7 +126,7 @@ const UploadProperty = () => {
   };
 
   return (
-    <div className="flex justify-center mt-10">
+    <div className="flex justify-center mt-10 sm:ml-0 ml-5 z-0">
       <div className="w-full max-w-md">
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
