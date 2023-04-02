@@ -126,6 +126,7 @@ const UploadProperty = () => {
           properties: currentProperties + 1,
         })
       );
+      localStorage.setItem("properties", currentProperties);
 
       // setCoverImage(null);
       // setOtherImages([]);

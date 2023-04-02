@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import usePremiumStatus from "../../stripe/usePremiumStatus";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
 
 import "./adjust.css";
 
@@ -85,7 +83,6 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                 </div>
                 <div className="flex flex-col w-full items-center">
                   <div className="flex flex-row space-x-5 items-center justify-center right-5 mt-[4%] w-ful">
-                    <Tooltip id="my-tooltip" />
                     {disable ? (
                       <></>
                     ) : (
@@ -103,19 +100,21 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                         ) : (
                           <>
                             <button
-                              disabled={true}
-                              data-tooltip-id="my-tooltip"
-                              data-tooltip-content="You need premium membership and correct accout type to use this feature"
-                              data-tooltip-place="left"
+                              onClick={() =>
+                                alert(
+                                  "You need correct account type and subscription to use this feature."
+                                )
+                              }
                               class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
                             >
                               Contact
                             </button>
                             <button
-                              disabled={true}
-                              data-tooltip-id="my-tooltip"
-                              data-tooltip-content="You need premium membership and correct accout type to use this feature"
-                              data-tooltip-place="right"
+                              onClick={() =>
+                                alert(
+                                  "You need correct account type and subscription to use this feature."
+                                )
+                              }
                               class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
                             >
                               Add to watch list
@@ -162,10 +161,11 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                           <>
                             <div className="flex items-center">
                               <button
-                                disabled={true}
-                                data-tooltip-id="my-tooltip"
-                                data-tooltip-content="You need premium membership and correct accout type to use this feature"
-                                data-tooltip-place="top"
+                                onClick={() =>
+                                  alert(
+                                    "You need correct account type and subscription to use this feature."
+                                  )
+                                }
                                 class="bg-gray-500  text-white font-bold py-2 px-4"
                               >
                                 See Listing From Same Owner
