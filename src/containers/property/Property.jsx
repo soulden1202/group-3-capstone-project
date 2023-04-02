@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { PropertyCard } from "./PropertyCard";
 import axios from "axios";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { BallTriangle } from "react-loader-spinner";
+import { MagnifyingGlass } from "react-loader-spinner";
 import Geocode from "react-geocode";
 
 const Property = () => {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
   const searchUrl =
     "https://studentrentapi20230322222647.azurewebsites.net/api/Property/Search";
+  // const searchUrl = "https://localhost:7228/api/Property/Search";
 
   const [address, setaddress] = useState("");
   const [city, setcity] = useState("");
@@ -212,15 +213,15 @@ const Property = () => {
         <div className="flex w-full md:w-[40%] h-[100%] flex-col overflow-y-scroll">
           {isLoading && (
             <div className="flex w-full h-full items-center justify-center">
-              <BallTriangle
-                height={100}
-                width={100}
-                radius={4}
+              <MagnifyingGlass
                 color="#ADD8E6"
-                ariaLabel="ball-triangle-loading"
-                wrapperClass={{}}
-                wrapperStyle=""
                 visible={true}
+                height="80"
+                width="80"
+                ariaLabel="MagnifyingGlass-loading"
+                wrapperStyle={{}}
+                wrapperClass="MagnifyingGlass-wrapper"
+                glassColor="#c0efff"
               />
             </div>
           )}

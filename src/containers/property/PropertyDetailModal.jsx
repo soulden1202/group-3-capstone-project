@@ -27,6 +27,8 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
     });
   });
 
+  console.log(homeData);
+
   return (
     <>
       <button
@@ -116,9 +118,8 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                     <div className="flex flex-col w-[50%] justify-center text-left">
                       <p>Number of Bedroom(s): {homeData.numberOfBedroom}</p>
                       <p>Number of Bathroom(s): {homeData.numberOfBathroom}</p>
-                      <p>Year Built: {homeData.yearBuilt}</p>
-                      <p>Acreage: {homeData.acreage}ft</p>
-                      <p>Price: ${homeData.price}</p>
+                      <p>Acreage: {homeData.acreage} sqft</p>
+                      <p>Price: ${homeData.price}/month</p>
                     </div>
                   </div>
                   {withId === true ? (

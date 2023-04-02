@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { createCheckoutSession } from "./createCheckoutSession";
 import usePremiumStatus from "../../stripe/usePremiumStatus";
-import { BallTriangle } from "react-loader-spinner";
+import { Oval } from "react-loader-spinner";
 
 const Pricing = () => {
   const user = useSelector((state) => state.user);
@@ -35,12 +35,23 @@ const Pricing = () => {
 
   return (
     <div>
-      <section className="relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+      <section className="relative z-0 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
         <div className="container mx-auto">
           {isLoading ? (
             <>
-              <div className="flex w-full h-full justify-center items-center align-middle">
-                <BallTriangle></BallTriangle>
+              <div className="flex w-full h-full justify-center items-center align-middle mt-[20%]">
+                <Oval
+                  color="#ADD8E6"
+                  height={80}
+                  width={80}
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                  ariaLabel="oval-loading"
+                  secondaryColor="#e8f4f8"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                ></Oval>
               </div>
             </>
           ) : (
@@ -154,11 +165,11 @@ const Pricing = () => {
                               y2="172"
                               gradientUnits="userSpaceOnUse"
                             >
-                              <stop stopColor="#3056D3" stop-opacity="0.09" />
+                              <stop stopColor="#3056D3" stopOpacity="0.09" />
                               <stop
                                 offset="1"
                                 stopColor="#C4C4C4"
-                                stop-opacity="0"
+                                stopOpacity="0"
                               />
                             </linearGradient>
                           </defs>
@@ -476,11 +487,11 @@ const Pricing = () => {
                               y2="172"
                               gradientUnits="userSpaceOnUse"
                             >
-                              <stop stopColor="#3056D3" stop-opacity="0.09" />
+                              <stop stopColor="#3056D3" stopOpacity="0.09" />
                               <stop
                                 offset="1"
                                 stopColor="#C4C4C4"
-                                stop-opacity="0"
+                                stopOpacity="0"
                               />
                             </linearGradient>
                           </defs>
@@ -790,11 +801,11 @@ const Pricing = () => {
                               y2="172"
                               gradientUnits="userSpaceOnUse"
                             >
-                              <stop stopColor="#3056D3" stop-opacity="0.09" />
+                              <stop stopColor="#3056D3" stopOpacity="0.09" />
                               <stop
                                 offset="1"
                                 stopColor="#C4C4C4"
-                                stop-opacity="0"
+                                stopOpacity="0"
                               />
                             </linearGradient>
                           </defs>

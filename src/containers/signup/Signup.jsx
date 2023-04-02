@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BallTriangle } from "react-loader-spinner";
+import { Oval } from "react-loader-spinner";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -176,21 +176,24 @@ const Signup = () => {
                   <option value="">Select an account type</option>
                   <option value="Renter">Renter</option>
                   <option value="Property Owner">Property Owner</option>
+                  <option value="Both">Both</option>
                 </select>
               </div>
               <div className="flex items-center justify-between">
                 {loading ? (
                   <div className="flex w-full h-full items-center justify-center">
-                    <BallTriangle
-                      height={100}
-                      width={100}
-                      radius={4}
+                    <Oval
                       color="#ADD8E6"
-                      ariaLabel="ball-triangle-loading"
-                      wrapperClass={{}}
-                      wrapperStyle=""
+                      height={80}
+                      width={80}
+                      wrapperStyle={{}}
+                      wrapperClass=""
                       visible={true}
-                    />
+                      ariaLabel="oval-loading"
+                      secondaryColor="#e8f4f8"
+                      strokeWidth={2}
+                      strokeWidthSecondary={2}
+                    ></Oval>
                   </div>
                 ) : (
                   <button

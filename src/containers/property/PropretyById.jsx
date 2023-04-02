@@ -8,10 +8,10 @@ import { useParams } from "react-router-dom";
 
 const PropretyById = () => {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
-  const searchUrl =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Property/SearchById";
+  // const searchUrl =
+  //   "https://studentrentapi20230322222647.azurewebsites.net/api/Property/SearchById";
 
-  //const searchUrl = "https://localhost:49159/api/Property/SearchById";
+  const searchUrl = "https://localhost:7228/api/Property/SearchById";
   const [homeData, sethomeData] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [center, setcenter] = useState({});

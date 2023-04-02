@@ -49,10 +49,10 @@ const Subscription = () => {
               </button>
             </div>
           ) : (
-            <div className=" mt-[15%] flex flex-col items-center justify-center text-xl">
+            <div className=" mt-[15%] text-center flex flex-col items-center justify-center sm:ml-0 text-lg md:text-xl">
               <p>You don't have any subscription.</p>
               <br></br>
-              <p>
+              <p className="">
                 Check out our{" "}
                 <span
                   className="text-blue-500 underline cursor-pointer"
@@ -60,6 +60,7 @@ const Subscription = () => {
                 >
                   pricing page
                 </span>{" "}
+                <br></br>
                 for more information.
               </p>
             </div>
