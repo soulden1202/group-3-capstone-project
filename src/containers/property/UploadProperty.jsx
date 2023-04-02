@@ -20,7 +20,7 @@ const UploadProperty = () => {
   const [numberOfBedroom, setNumberOfBedroom] = useState("");
   const [numberOfBathroom, setNumberOfBathroom] = useState("");
   const [acreage, setAcreage] = useState("");
-  const [yearBuilt, setYearBuilt] = useState("");
+
   const [price, setPrice] = useState("");
 
   const accountId = useSelector((state) => state.user.id);
@@ -78,10 +78,6 @@ const UploadProperty = () => {
     setAcreage(e.target.value);
   };
 
-  const handleYearBuiltChange = (e) => {
-    setYearBuilt(e.target.value);
-  };
-
   const handlePriceChange = (e) => {
     setPrice(e.target.value);
   };
@@ -101,13 +97,14 @@ const UploadProperty = () => {
     formData.append("numberOfBedroom", numberOfBedroom);
     formData.append("numberOfBathroom", numberOfBathroom);
     formData.append("acreage", acreage);
-    formData.append("yearBuilt", yearBuilt);
+    formData.append("email", user.email);
     formData.append("price", price);
     formData.append("propertyId", "");
 
     try {
       const response = await fetch(
         "https://studentrentapi20230322222647.azurewebsites.net/api/Property/Add",
+        //"https://localhost:7228/api/Property/Add",
         {
           method: "POST",
           body: formData,
@@ -341,22 +338,6 @@ const UploadProperty = () => {
               placeholder="Acreage"
               value={acreage}
               onChange={handleAcreageChange}
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="yearBuilt"
-            >
-              Year Built:
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="yearBuilt"
-              type="text"
-              placeholder="Year Built"
-              value={yearBuilt}
-              onChange={handleYearBuiltChange}
             />
           </div>
           <div className="mb-4">
