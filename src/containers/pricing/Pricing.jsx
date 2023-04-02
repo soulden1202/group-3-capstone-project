@@ -31,6 +31,15 @@ const Pricing = () => {
         createCheckoutSession(user.id, "price_1MqyNKHCd0MN7uajn1jlRDnl");
       }
     }
+
+    if (userType === "Both") {
+      setisLoading(true);
+      if (isYearly) {
+        createCheckoutSession(user.id, "price_1MsGCCHCd0MN7uajdq1ofjbw");
+      } else {
+        createCheckoutSession(user.id, "price_1MsGCCHCd0MN7uajXO0X5m4B");
+      }
+    }
   };
 
   return (
@@ -99,7 +108,7 @@ const Pricing = () => {
                 <div className="w-full px-4 md:w-1/2 lg:w-1/3">
                   <div className="border-primary shadow-pricing relative z-10 mb-10 overflow-hidden rounded-xl border border-opacity-20 bg-white py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12">
                     <span className="text-primary mb-4 block text-lg font-semibold">
-                      Tenant
+                      Premium Renter
                     </span>
                     <h2 className="text-dark mb-5 text-[42px] font-bold">
                       ${isYearly ? "50" : "5"}
@@ -137,7 +146,9 @@ const Pricing = () => {
                             : "bg-transparent hover:text-white hover:bg-blue-500"
                         } text-primary hover:bg-primary hover:border-primary block w-full rounded-md border border-[#D4DEFF]  p-4 text-center text-base font-semibold transition`}
                       >
-                        {userIsPremium ? "Already a member" : "Choose Tenant"}
+                        {userIsPremium
+                          ? "Already a member"
+                          : "Be Premium Renter"}
                       </button>
                     )}
 
@@ -415,7 +426,7 @@ const Pricing = () => {
                 <div className="w-full px-4 md:w-1/2 lg:w-1/3">
                   <div className="border-primary shadow-pricing relative z-10 mb-10 overflow-hidden rounded-xl border border-opacity-20 bg-white py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12">
                     <span className="text-primary mb-4 block text-lg font-semibold">
-                      Property Owner
+                      Premium Property Owner
                     </span>
                     <h2 className="text-dark mb-5 text-[42px] font-bold">
                       ${isYearly ? "100" : 10}
@@ -460,7 +471,7 @@ const Pricing = () => {
                       >
                         {userIsPremium
                           ? "Already a member"
-                          : "Choose Property Owner"}
+                          : "Be Premium Property Owner"}
                       </button>
                     )}
                     <div>
@@ -737,7 +748,7 @@ const Pricing = () => {
                 <div className="w-full px-4 md:w-1/2 lg:w-1/3">
                   <div className="border-primary shadow-pricing relative z-10 mb-10 overflow-hidden rounded-xl border border-opacity-20 bg-white py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12">
                     <span className="text-primary mb-4 block text-lg font-semibold">
-                      Tenant & Property Owner
+                      Premium Tenant & Property Owner
                     </span>
                     <h2 className="text-dark mb-5 text-[42px] font-bold">
                       ${isYearly ? "120" : "15"}
@@ -767,16 +778,23 @@ const Pricing = () => {
                         12 Months support
                       </p>
                     </div>
-                    <button
-                      disabled={userIsPremium ? true : false}
-                      className={`${
-                        userIsPremium
-                          ? "bg-gray-500 text-gray-200"
-                          : "bg-transparent hover:text-white hover:bg-blue-500"
-                      } text-primary hover:bg-primary hover:border-primary block w-full rounded-md border border-[#D4DEFF]  p-4 text-center text-base font-semibold transition`}
-                    >
-                      {userIsPremium ? "Already a member" : "Be Both!"}
-                    </button>
+                    {user.id !== null && (
+                      <button
+                        onClick={() => handleOnclick("Both")}
+                        disabled={
+                          userIsPremium || user.accountType !== "Both"
+                            ? true
+                            : false
+                        }
+                        className={`${
+                          userIsPremium || user.accountType !== "Both"
+                            ? "bg-gray-500 text-gray-200"
+                            : "bg-transparent hover:text-white hover:bg-blue-500"
+                        } text-primary hover:bg-primary hover:border-primary block w-full rounded-md border border-[#D4DEFF]  p-4 text-center text-base font-semibold transition`}
+                      >
+                        {userIsPremium ? "Already a member" : "Be Premium"}
+                      </button>
+                    )}
                     <div>
                       <span className="absolute right-0 top-7 z-[-1]">
                         <svg

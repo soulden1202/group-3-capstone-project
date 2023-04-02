@@ -4,6 +4,9 @@ import ImageGallery from "react-image-gallery";
 import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import usePremiumStatus from "../../stripe/usePremiumStatus";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 import "./adjust.css";
 
@@ -13,6 +16,7 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
+  const isPremium = usePremiumStatus(user);
 
   useEffect(() => {
     if (user.id !== null) setdisable(false);
@@ -39,10 +43,10 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
         More Detail
       </button>
       {open === true && (
-        <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto inset-0 h-full">
+        <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden  inset-0 h-full">
           <div className="flex relative w-full h-full ">
-            <div className="relative w-full bg-white rounded-lg shadow ">
-              <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+            <div className="relative w-full bg-white rounded-lg shadow h-full overflow-y-scroll ">
+              <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600 mt-20">
                 <h3 className="text-xl font-semibold text-gray-900">
                   Details Information
                 </h3>
@@ -81,33 +85,47 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                 </div>
                 <div className="flex flex-col w-full items-center">
                   <div className="flex flex-row space-x-5 items-center justify-center right-5 mt-[4%] w-ful">
+                    <Tooltip id="my-tooltip" />
                     {disable ? (
-                      <>
-                        <button
-                          class="bg-gray-500  text-white font-bold py-2 px-4"
-                          disabled={true}
-                        >
-                          Contact
-                        </button>
-                        <button
-                          disabled={true}
-                          class="bg-gray-500  text-white font-bold py-2 px-4"
-                        >
-                          Add to watch list
-                        </button>
-                      </>
+                      <></>
                     ) : (
                       <>
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
-                          Contact
-                        </button>
-                        <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                          Add to watch list
-                        </button>
+                        {(isPremium && user.accountType === "Renter") ||
+                        (isPremium && user.accountType === "Both") ? (
+                          <>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                              Contact
+                            </button>
+                            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                              Add to watch list
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              disabled={true}
+                              data-tooltip-id="my-tooltip"
+                              data-tooltip-content="You need premium membership and correct accout type to use this feature"
+                              data-tooltip-place="left"
+                              class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
+                            >
+                              Contact
+                            </button>
+                            <button
+                              disabled={true}
+                              data-tooltip-id="my-tooltip"
+                              data-tooltip-content="You need premium membership and correct accout type to use this feature"
+                              data-tooltip-place="right"
+                              class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
+                            >
+                              Add to watch list
+                            </button>
+                          </>
+                        )}
                       </>
                     )}
                   </div>
-                  <div className="flex flex-row justify-between items-center ml-[10%] mt-[2%] w-full lg:w-[30%] text-black ">
+                  <div className="flex flex-row justify-between items-center  mt-[2%] w-full lg:w-[30%] text-black ">
                     <div className="flex flex-col w-[50%] justify-center text-left">
                       <p>Address:</p>
                       <p>{homeData.address}</p>
@@ -122,25 +140,42 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                       <p>Price: ${homeData.price}/month</p>
                     </div>
                   </div>
-                  {withId === true ? (
-                    <></>
-                  ) : (
-                    <>
-                      {user.accountType === "Renter" && (
-                        <div className="flex items-center">
-                          <button
-                            // disabled={!user.isSubscripted}
-                            onClick={() =>
-                              navigate(`/property/${homeData.accountId}`)
-                            }
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-                          >
-                            See Listing From Same Owner
-                          </button>
-                        </div>
-                      )}
-                    </>
-                  )}
+                  <div className="flex items-center justify-center w-full mt-5">
+                    {withId || disable ? (
+                      <></>
+                    ) : (
+                      <>
+                        {(isPremium && user.accountType === "Renter") ||
+                        (isPremium && user.accountType === "Both") ? (
+                          <div className="flex items-center">
+                            <button
+                              // disabled={!user.isSubscripted}
+                              onClick={() =>
+                                navigate(`/property/${homeData.accountId}`)
+                              }
+                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
+                            >
+                              See Listing From Same Owner
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <div className="flex items-center">
+                              <button
+                                disabled={true}
+                                data-tooltip-id="my-tooltip"
+                                data-tooltip-content="You need premium membership and correct accout type to use this feature"
+                                data-tooltip-place="top"
+                                class="bg-gray-500  text-white font-bold py-2 px-4"
+                              >
+                                See Listing From Same Owner
+                              </button>
+                            </div>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
