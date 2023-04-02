@@ -9,6 +9,7 @@ const userSlice = createSlice({
     email: localStorage.getItem("email"),
     accountType: localStorage.getItem("accountType"),
     user: localStorage.getItem("user"),
+    properties: localStorage.getItem("properties"),
   },
   reducers: {
     setUserInfo(state, action) {
@@ -18,6 +19,7 @@ const userSlice = createSlice({
       state.lastName = action.payload.lastName;
       state.accountType = action.payload.accountType;
       state.user = action.payload.user;
+      state.properties = action.payload.properties;
     },
     clearUserInfo(state) {
       state.id = null;
@@ -26,10 +28,15 @@ const userSlice = createSlice({
       state.lastName = null;
       state.accountType = null;
       state.user = null;
+      state.properties = null;
+    },
+    propertiesAdded(state, action) {
+      state.properties = action.payload.properties;
     },
   },
 });
 
-export const { setUserInfo, clearUserInfo } = userSlice.actions;
+export const { setUserInfo, clearUserInfo, propertiesAdded } =
+  userSlice.actions;
 
 export default userSlice.reducer;
