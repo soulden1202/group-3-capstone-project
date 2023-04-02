@@ -210,7 +210,7 @@ const Property = () => {
         </div>
       </div>
       <div className="flex md:flex-row flex-col w-full h-full ">
-        <div className="flex w-full md:w-[40%] h-[100%] flex-col overflow-y-scroll">
+        <div className="flex w-full md:w-[40%] h-[90%] flex-col overflow-y-scroll">
           {isLoading && (
             <div className="flex w-full h-full items-center justify-center">
               <MagnifyingGlass

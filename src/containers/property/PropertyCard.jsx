@@ -12,7 +12,7 @@ export const PropertyCard = ({ homeData, onCardSelected, withId = false }) =>
   {
     return (
       <div
-        className="flex w-full h-auto border-[1px] border-blue-400 mt-1 ml-1 rounded-md flex-row hover:border-blue-600 hover:border-2"
+        className="flex w-full h-[10%] border-[1px] border-blue-400 mt-1 ml-1 rounded-md flex-row hover:border-blue-600 hover:border-2"
         onClick={() =>
           onCardSelected(
             homeData.address,
