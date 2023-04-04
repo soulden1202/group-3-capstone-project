@@ -2,89 +2,89 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { PropertyDetailModal } from "../property/PropertyDetailModal";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const Watchinglist = () => {
-    let navigate = useNavigate();
-    const user = useSelector((state) => state.user);
-    const watchlist = useSelector((state) => state.watchlist);
+  const user = useSelector((state) => state.user);
+  const watchList = user.watchList;
+  const isNavbarMinimized = user.navBarMinimized;
 
-    useEffect(() => {
-        if (!user.id) {
-            navigate("/login");
-        }
-    }, [user.id, navigate]);
+  const [executed, setexecuted] = useState(false);
 
-    const searchUrl =
-        "https://studentrentapi20230322222647.azurewebsites.net/api/Property/SearchById";
+  const searchUrl =
+    "https://studentrentapi20230322222647.azurewebsites.net/api/Property/SearchById";
 
-    const [homeData, sethomeData] = useState([]);
+  const [homeData, sethomeData] = useState([]);
 
-    const search = async () => {
-        let data = [];
-        for (let i = 0; i < watchlist.length; i++) {
-            await axios({
-                method: "post",
-                url: searchUrl,
-                headers: {},
-                data: {
-                    propertyId: watchlist[i],
-                },
-            }).then((res) => {
-                data.push(res.data[0]);
-            });
-        }
-        sethomeData(data);
-    };
+  const search = async () => {
+    let data = [];
+    for (let i = 0; i < watchList.length; i++) {
+      await axios({
+        method: "post",
+        url: searchUrl,
+        headers: {},
+        data: {
+          propertyId: watchList[i],
+        },
+      }).then((res) => {
+        data.push(res.data[0]);
+      });
+    }
+    sethomeData(data);
+    setexecuted(true);
+    console.log(1);
+  };
 
-    useEffect(() => {
-        document.title = "Watchlist - Livin it";
-        search();
-    }, [search]);
+  useEffect(() => {
+    if (!executed) {
+      search();
+    }
+    // eslint-disable-next-line
+  }, []);
 
-    const onCardSelected = (address, city, state, zipCode) => {
-        console.log(
-            `Address: ${address}, City: ${city}, State: ${state}, Zip Code: ${zipCode}`
-        );
-    };
-
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-items-center">
-            {homeData.map((value, key) => (
-                <div
-                    key={key}
-                    className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-                >
-                    <div
-                        className="h-57 w-full bg-cover relative"
-                        style={{ backgroundImage: "none" }}
-                        onClick={() =>
-                            onCardSelected(
-                                value.address,
-                                value.city,
-                                value.state,
-                                value.zipCode
-                            )
-                        }
-                    >
-                        <img
-                            src={value.coverImage}
-                            alt={value.address}
-                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                        />
-                        <div className="flex justify-end items-end h-full w-full bg-gray-900 bg-opacity-50"></div>
-                    </div>
-                    <div className="px-5 py-3">
-                        <h3 className="text-gray-700 uppercase">{value.address}</h3>
-                        <span className="text-gray-500 mt-2">${value.price}</span>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 px-5 pb-3">
-                        <PropertyDetailModal homeData={value} />
-                    </div>
+  return (
+    <div
+      className={`flex flex-row w-full h-full gap-4 ${
+        isNavbarMinimized ? "ml-5" : "ml-[15%]"
+      }`}
+    >
+      {homeData.map((value, key) => (
+        <>
+          <div className="flex w-[25%] h-[15%] border-[1px] border-blue-400 mt-1 ml-1 rounded-md flex-row hover:border-blue-600 hover:border-2">
+            <div className="flex w-[20%] h-full mr-1 object-cover items-center justify-center bg-gray-100">
+              <img
+                className="h-[100%] w-[100%] object-cover"
+                src={value.coverImage}
+                alt="Home"
+              />
+            </div>
+            <div className="flex w-[70%] flex-row">
+              <div className="flex w-[80%] flex-col ">
+                <div>
+                  {value.address}, {value.city}, {value.state.toUpperCase()},{" "}
+                  {value.zipCode}
                 </div>
-            ))}
-        </div>
-    );
+                <div>Bedroom(s): {value.numberOfBedroom}</div>
+                <div>Bathroom(s): {value.numberOfBathroom}</div>
+                <div>Year Built: {value.yearBuilt}</div>
+                <div>{value.acreage}ft</div>
+                <div className="md:hidden flex text-blue-700">
+                  Display on Map
+                </div>
+              </div>
+              <div className="flex w-[20%] flex-col mr-3">
+                <div className="flex w-full h-full items-center justify-end">
+                  <PropertyDetailModal
+                    homeData={value}
+                    withId={true}
+                  ></PropertyDetailModal>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ))}
+    </div>
+  );
 };
 
 export default Watchinglist;

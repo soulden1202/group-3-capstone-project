@@ -37,71 +37,68 @@ const Login = () => {
     document.title = "Login - Livin it";
   }, [user.id, navigate]);
 
-    const handleLogin = () => {
-        const apiUrl =
-            "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
+  const handleLogin = () => {
+    const apiUrl =
+      "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
 
-        //const apiUrl = "https://localhost:7228/api/Auth/login";
+    //const apiUrl = "https://localhost:7228/api/Auth/login";
 
-        logInWithEmailAndPassword(email, password);
+    logInWithEmailAndPassword(email, password);
 
-        setloading(true);
-        fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password,
-            }),
-        })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Login failed");
-                }
-            })
-            .then((data) => {
-                console.log(data);
+    setloading(true);
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Login failed");
+        }
+      })
+      .then((data) => {
+        console.log(data.watchList);
 
-                //Todo: Check if user has subcription or subscription expired
-                //Todo: If expired then send a request to adjust account infor accordingly
+        const { accessToken, refreshToken } = data;
+        dispatch(setTokens({ accessToken, refreshToken }));
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("id", data.id);
+        localStorage.setItem("firstName", data.firstName);
+        localStorage.setItem("lastName", data.lastName);
+        localStorage.setItem("email", data.email);
+        localStorage.setItem("accountType", data.accountType);
+        localStorage.setItem("user", data.user);
+        localStorage.setItem("properties", data.properties);
+        localStorage.setItem("watchList", data.watchList);
 
-                const { accessToken, refreshToken } = data;
-                dispatch(setTokens({ accessToken, refreshToken }));
-                localStorage.setItem("accessToken", accessToken);
-                localStorage.setItem("refreshToken", refreshToken);
-                localStorage.setItem("id", data.id);
-                localStorage.setItem("firstName", data.firstName);
-                localStorage.setItem("lastName", data.lastName);
-                localStorage.setItem("email", data.email);
-                localStorage.setItem("accountType", data.accountType);
-                localStorage.setItem("user", JSON.stringify(data.user));
-                localStorage.setItem("properties", JSON.stringify(data.properties));
-                localStorage.setItem("watchList", JSON.stringify(data.watchList));
-                console.log("watchList stored in local storage:", data.watchList);
-                dispatch(
-                    setUserInfo({
-                        id: data.id,
-                        email: data.email,
-                        firstName: data.firstName,
-                        lastName: data.lastName,
-                        accountType: data.accountType,
-                        user: data.user,
-                        properties: data.properties,
-                    })
-                );
-                setloading(false);
-                navigate("/");
-            })
-            .catch((error) => {
-                console.error(error);
-                // handle login error here
-            });
-    };
-
+        dispatch(
+          setUserInfo({
+            id: data.id,
+            email: data.email,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            accountType: data.accountType,
+            user: data.user,
+            properties: data.properties,
+            watchList: data.watchList,
+          })
+        );
+        setloading(false);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+        // handle login error here
+      });
+  };
 
   const handleForgotPassword = () => {
     console.log("Forgot password clicked");

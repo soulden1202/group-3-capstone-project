@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import usePremiumStatus from "../../stripe/usePremiumStatus";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
 
 import "./adjust.css";
 
@@ -85,7 +83,6 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                 </div>
                 <div className="flex flex-col w-full items-center">
                   <div className="flex flex-row space-x-5 items-center justify-center right-5 mt-[4%] w-ful">
-                    <Tooltip id="my-tooltip" />
                     {disable ? (
                       <></>
                     ) : (

@@ -16,7 +16,6 @@ const Subscription = () => {
 
   const handleOnclick = () => {
     if (isPremium && stripeId !== "") {
-      console.log(stripeId);
       CreateCustomerPortal(stripeId);
     }
   };
@@ -30,11 +29,12 @@ const Subscription = () => {
         }
       });
     }
-  }, [isPremium, user.id]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
-      <div className="z-0 fixed w-full h-full align-middle items-center justify-cente">
+      <div className="z-0 fixed w-full h-full align-middle items-center justify-center">
         <div className="flex flex-col w-full h-full">
           <div className="flex items-center justify-center text-xl mt-5 font-bold">
             Your Subscription
