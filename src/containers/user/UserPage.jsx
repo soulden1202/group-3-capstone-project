@@ -67,7 +67,8 @@ const UserPage = () => {
     }
 
     document.title = `${user.firstName} ${user.lastName} - Livin it`;
-  }, [user.id, navigate, userId, user.firstName, user.lastName]);
+    // eslint-disable-next-line
+  }, []);
 
   const accountType = user.accountType;
 
@@ -90,7 +91,9 @@ const UserPage = () => {
           {isPropretyPage && <PropPortfolio></PropPortfolio>}
           {isAddPropertyPage && <UploadProperty></UploadProperty>}
           {isSubscriptionPage && <Subscription></Subscription>}
-          {isWatchingList && <WatchingList></WatchingList>}
+          {isWatchingList && (
+            <WatchingList isWatchingList={isWatchingList}></WatchingList>
+          )}
         </div>
       </div>
 

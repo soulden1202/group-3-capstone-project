@@ -10,6 +10,8 @@ const userSlice = createSlice({
     accountType: localStorage.getItem("accountType"),
     user: localStorage.getItem("user"),
     properties: localStorage.getItem("properties"),
+    watchList: localStorage.getItem("watchList"),
+    navBarMinimized: false,
   },
   reducers: {
     setUserInfo(state, action) {
@@ -20,6 +22,8 @@ const userSlice = createSlice({
       state.accountType = action.payload.accountType;
       state.user = action.payload.user;
       state.properties = action.payload.properties;
+      state.watchList = action.payload.watchList;
+      state.navBarMinimized = false;
     },
     clearUserInfo(state) {
       state.id = null;
@@ -29,14 +33,18 @@ const userSlice = createSlice({
       state.accountType = null;
       state.user = null;
       state.properties = null;
+      state.watchList = null;
     },
     propertiesAdded(state, action) {
       state.properties = action.payload.properties;
     },
+    changeNavbarSize(state, action) {
+      state.navBarMinimized = action.payload.navBarMinimized;
+    },
   },
 });
 
-export const { setUserInfo, clearUserInfo, propertiesAdded } =
+export const { setUserInfo, clearUserInfo, propertiesAdded, changeNavbarSize } =
   userSlice.actions;
 
 export default userSlice.reducer;

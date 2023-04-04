@@ -64,10 +64,7 @@ const Login = () => {
         }
       })
       .then((data) => {
-        console.log(data);
-
-        //Todo: Check if user has subcription or subscription expired
-        //Todo: If expired then send a request to adjust account infor accordingly
+        console.log(data.watchList);
 
         const { accessToken, refreshToken } = data;
         dispatch(setTokens({ accessToken, refreshToken }));
@@ -80,6 +77,8 @@ const Login = () => {
         localStorage.setItem("accountType", data.accountType);
         localStorage.setItem("user", data.user);
         localStorage.setItem("properties", data.properties);
+        localStorage.setItem("watchList", data.watchList);
+
         dispatch(
           setUserInfo({
             id: data.id,
@@ -89,6 +88,7 @@ const Login = () => {
             accountType: data.accountType,
             user: data.user,
             properties: data.properties,
+            watchList: data.watchList,
           })
         );
         setloading(false);
