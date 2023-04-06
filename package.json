@@ -23,6 +23,7 @@
     "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
     "react-select-us-states": "^0.1.2",
+    "react-toastify": "^9.1.2",
     "redux": "^4.2.1",
     "stripe": "^11.17.0",
     "tailwind": "^4.0.0",
