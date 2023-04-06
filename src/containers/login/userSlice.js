@@ -41,10 +41,19 @@ const userSlice = createSlice({
     changeNavbarSize(state, action) {
       state.navBarMinimized = action.payload.navBarMinimized;
     },
+    changeName(state, action) {
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+    },
   },
 });
 
-export const { setUserInfo, clearUserInfo, propertiesAdded, changeNavbarSize } =
-  userSlice.actions;
+export const {
+  setUserInfo,
+  clearUserInfo,
+  propertiesAdded,
+  changeNavbarSize,
+  changeName,
+} = userSlice.actions;
 
 export default userSlice.reducer;
