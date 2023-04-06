@@ -226,7 +226,7 @@ const Property = () => {
             </div>
           )}
           {homeData.length > 0 && !isLoading && (
-            <div>
+            <div className="w-full h-full">
               {homeData.map((value, key) => (
                 <PropertyCard
                   homeData={value}

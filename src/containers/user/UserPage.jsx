@@ -73,7 +73,7 @@ const UserPage = () => {
   const accountType = user.accountType;
 
   return (
-    <div className="fixed w-full h-full overflow-scroll">
+    <div className="fixed w-full h-full overflow-y-scroll">
       <div className="flex flex-row justify-center">
         <div>
           <SideNav

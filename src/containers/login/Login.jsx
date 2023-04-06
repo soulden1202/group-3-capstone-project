@@ -17,6 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setloading] = useState(false);
   const isLoggedIn = IsLoggedIn();
+
   let navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
@@ -78,7 +79,7 @@ const Login = () => {
         localStorage.setItem("accountType", data.accountType);
         localStorage.setItem("user", data.user);
         localStorage.setItem("properties", data.properties);
-        localStorage.setItem("watchList", data.watchList);
+        localStorage.setItem("watchList", JSON.stringify(data.watchList));
 
         dispatch(
           setUserInfo({
