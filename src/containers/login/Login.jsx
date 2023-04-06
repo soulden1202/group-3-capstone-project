@@ -60,6 +60,7 @@ const Login = () => {
         if (response.ok) {
           return response.json();
         } else {
+          setloading(false);
           throw new Error("Login failed");
         }
       })
