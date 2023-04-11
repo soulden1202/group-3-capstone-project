@@ -29,7 +29,7 @@ export const PropertyDetailModal = ({
   const dispatch = useDispatch();
 
   const url =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Property/WatchList";
+    "https://studentrentapi20230411081843.azurewebsites.net/api/Property/WatchList";
 
   const user = useSelector((state) => state.user);
   const isPremium = usePremiumStatus(user);

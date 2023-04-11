@@ -25,7 +25,7 @@ const Account = () => {
   const [inputValid, setinputValid] = useState(false);
 
   const url =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/InforChange";
+    "https://studentrentapi20230411081843.azurewebsites.net/api/Auth/InforChange";
 
   const handleBlur = () => {
     if (repeatNewPaswword !== newPassword) {
@@ -248,7 +248,7 @@ const Account = () => {
           <>
             <div className="flex flex-col gap-4 mt-[10%]">
               <div className="font-bold text-center text-lg">
-                Your Account Ìnormation
+                Your Account Information
               </div>
               <div>
                 <div>
