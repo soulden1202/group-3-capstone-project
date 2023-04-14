@@ -2,7 +2,7 @@
 
 https://livin-it.netlify.app/
 
-#Promotion website
+# Promotion website
 
 https://livin-it-promo.netlify.app/
 
