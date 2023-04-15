@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <nav className="stroke flex relative w-full h-[4rem] z-10 bg-white items-center text-center justify-between shadow-md">
       <div
-        className="flex ml-5 h-full items-center cursor-pointer"
+        className="flex flex-row ml-5 h-full items-center cursor-pointer gap-5"
         onClick={() => navigate("/")}
       >
         <img
@@ -40,6 +40,7 @@ const Navbar = () => {
           alt="logo"
           className="object-cover h-10 w-10 rounded-lg "
         />
+        <div className="text-blue-500 font-bold text-xl">Livin it</div>
       </div>
       <ul className=" flex-row mr-5 lg:mr-[10rem] space-x-11 lg:flex hidden">
         <li>
