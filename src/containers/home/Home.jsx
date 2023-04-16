@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const Home = () => {
   useEffect(() => {
-    document.title = "Home - Livin it";
+    document.title = "Home - Livin It";
   }, []);
 
     const titleStyles = {
@@ -24,7 +24,7 @@ const Home = () => {
               <h1 style={titleStyles}>Let's find your dream house</h1>
           </div>
           <div className="par flex justify-center items-center">
-              <p style={parStyle}>At Livin it we don't just show you houses we make your dream come true</p>
+              <p style={parStyle}>At Livin It we do not just show you houses we make your dream come true</p>
           </div>
           <div className="p-3 flex justify-center items-center">
               <form action={"/property"}>
