@@ -238,7 +238,7 @@ const Property = () => {
           )}
           {!isLoading && homeData.length === 0 && (
             <div className="flex justify-center items-center h-full">
-              No homes to show
+              No home list to show
             </div>
           )}
         </div>
