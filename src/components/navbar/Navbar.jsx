@@ -40,7 +40,7 @@ const Navbar = () => {
           alt="logo"
           className="object-cover h-10 w-10 rounded-lg "
         />
-        <div className="text-blue-500 font-bold text-xl">Livin it</div>
+        <div className="text-blue-500 font-bold text-xl">Livin It</div>
       </div>
       <ul className=" flex-row mr-5 lg:mr-[10rem] space-x-11 lg:flex hidden">
         <li>
