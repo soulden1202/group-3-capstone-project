@@ -146,7 +146,7 @@ const Login = () => {
                   className="text-gray-600 hover:text-gray-700"
                   onClick={handleForgotPassword}
                 >
-                  Forgot Password
+                     Forgot Password
                 </button>
                 <button
                   className="text-gray-600 hover:text-gray-700"
