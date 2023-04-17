@@ -248,7 +248,7 @@ const Account = () => {
           <>
             <div className="flex flex-col gap-4 mt-[10%]">
               <div className="font-bold text-center text-lg">
-                Your Account Ìnormation
+                Your Account Information
               </div>
               <div>
                 <div>

@@ -6,13 +6,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 
 const PropPortfolio = () => {
-    let navigate = useNavigate();
-    const user = useSelector((state) => state.user);
-    useEffect(() => {
-        if (!user.id) {
-            navigate("/login");
-        }
-    }, [user.id, navigate]);
+  let navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    if (!user.id) {
+      navigate("/login");
+    }
+  }, [user.id, navigate]);
 
     const searchUrl =
         "https://studentrentapi20230411081843.azurewebsites.net/api/Property/SearchById";

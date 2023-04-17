@@ -7,6 +7,7 @@ const UpdateProperty = () => {
     const { propertyId } = useParams();
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         const fetchProperty = async () => {
@@ -68,30 +69,32 @@ const UpdateProperty = () => {
     };
 
     const handlePriceChange = (e) => {
-        setProperty({ ...property, price: e.target.value }
-            );
+        setProperty({ ...property, price: e.target.value });
     };
+
+    //const handleYearBuiltChange = (e) => {
+    //    setProperty({ ...property, yearBuilt: e.target.value });
+    //};
 
     const handleUpdate = async () => {
         try {
+            const formData = new FormData();
+            formData.append("PropertyId", propertyId);
+            formData.append("Address", property.address || "");
+            formData.append("City", property.city || "");
+            formData.append("State", property.state || "");
+            formData.append("ZipCode", property.zipCode || "");
+            formData.append("NumberOfBedroom", property.numberOfBedroom || "");
+            formData.append("NumberOfBathroom", property.numberOfBathroom || "");
+            formData.append("Acreage", property.acreage || "");
+            formData.append("Price", property.price || "");
+            //formData.append("yearBuilt", property.yearBuilt || "");
+
             const response = await fetch(
                 `https://studentrentapi20230411081843.azurewebsites.net/api/Property/Update`,
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        PropertyId: propertyId,
-                        Address: property.address || "",
-                        City: property.city || "",
-                        State: property.state || "",
-                        ZipCode: property.zipCode || "",
-                        NumberOfBedroom: property.numberOfBedroom || "",
-                        NumberOfBathroom: property.numberOfBathroom || "",
-                        Acreage: property.acreage || "",
-                        Price: property.price || "",
-                    }),
+                    body: formData,
                 }
             );
             if (!response.ok) {
@@ -100,12 +103,13 @@ const UpdateProperty = () => {
             const data = await response.json();
             console.log(`Updated property ${propertyId} with address ${property.address}`);
             console.log(data);
+            setMessage("Property updated successfully!");
             navigate(`/property/${propertyId}`);
         } catch (error) {
             console.error("Error:", error);
+            setMessage("Failed to update the property. Please check the input fields and try again.");
         }
     };
-
 
 
 
@@ -144,6 +148,8 @@ const UpdateProperty = () => {
                         className="w-full p-2 border border-gray-400 rounded-md"
                     />
                 </div>
+                 {/*{message && <div className="text-center mt-4">{message}</div>}  */}
+
                 <div className="mb-4">
                     <label htmlFor="state" className="block font-medium text-gray-700 mb-2">
                         State
@@ -205,7 +211,8 @@ const UpdateProperty = () => {
                         name="acreage"
                         id="acreage"
                         value={property.acreage || ""}
-                        onChange={handleAcreageChange}
+                        onChange={handleAcreageChange
+                        }
                         className="w-full p-2 border border-gray-400 rounded-md"
                     />
                 </div>
@@ -222,10 +229,23 @@ const UpdateProperty = () => {
                         className="w-full p-2 border border-gray-400 rounded-md"
                     />
                 </div>
-                <div className="flex justify-center">
+                {/*<div className="mb-4">*/}
+                {/*    <label htmlFor="yearbuilt" className="block font-medium text-gray-700 mb-2">*/}
+                {/*        Year Built*/}
+                {/*    </label>*/}
+                {/*    <input*/}
+                {/*        type="number"*/}
+                {/*        name="yearbuilt"*/}
+                {/*        id="yearbuilt"*/}
+                {/*        value={property.yearBuilt || ""}*/}
+                {/*        onChange={handleYearBuiltChange}*/}
+                {/*        className="w-full p-2 border border-gray-400 rounded-md"*/}
+                {/*    />*/}
+                {/*</div>*/}
+                <div className="flex justify-center mt-6">
                     <button
                         onClick={handleUpdate}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
                     >
                         Update
                     </button>
