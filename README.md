@@ -1,6 +1,10 @@
-# Live demo
+# Website
 
-https://papaya-sable-d25970.netlify.app/
+https://livin-it.netlify.app/
+
+# Promo Website
+
+https://livin-it-promo.netlify.app/
 
 # Getting Started with Create React App
 
