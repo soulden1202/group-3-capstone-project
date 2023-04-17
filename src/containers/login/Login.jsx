@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTokens } from "../login/authSlice.js";
 import { setUserInfo } from "../login/userSlice.js";
-import { IsLoggedIn } from "../login/IsLoggedIn.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -15,7 +14,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [loading, setloading] = useState(false);
     const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
-    const isLoggedIn = IsLoggedIn();
+
 
     let navigate = useNavigate();
 
@@ -116,9 +115,7 @@ const Login = () => {
     };
 
 
-    const handleCloseForgotPasswordModal = () => {
-        setShowForgotPasswordModal(false);
-    };
+
 
     return (
         <div className="flex h-screen bg-gray-100">

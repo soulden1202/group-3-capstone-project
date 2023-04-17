@@ -7,7 +7,7 @@ const UpdateProperty = () => {
     const { propertyId } = useParams();
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
-    const [message, setMessage] = useState("");
+    const accountId = property?.[0]?.accountId;
 
     useEffect(() => {
         const fetchProperty = async () => {
@@ -35,10 +35,11 @@ const UpdateProperty = () => {
     }, [propertyId]);
 
     useEffect(() => {
-        if (property?.[0]?.accountId && user.id !== property[0].accountId) {
+        if (accountId && user.id !== accountId) {
             navigate("/");
         }
-    }, [property?.[0]?.accountId, user.id, navigate]);
+    }, [accountId, user.id, navigate]);
+
 
     const handleAddressChange = (e) => {
         setProperty({ ...property, address: e.target.value });
@@ -102,13 +103,9 @@ const UpdateProperty = () => {
             }
             const data = await response.json();
             console.log(`Updated property ${propertyId} with address ${property.address}`);
-            console.log(data);
-            setMessage("Property updated successfully!");
-            navigate(`/property/${propertyId}`);
+            console.log(data);            navigate(`/property/${propertyId}`);
         } catch (error) {
-            console.error("Error:", error);
-            setMessage("Failed to update the property. Please check the input fields and try again.");
-        }
+            console.error("Error:", error);        }
     };
 
 
