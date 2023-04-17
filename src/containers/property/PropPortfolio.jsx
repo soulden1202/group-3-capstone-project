@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { PropertyDetailModal } from "./PropertyDetailModal";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { Oval } from "react-loader-spinner";
 
 const PropPortfolio = () => {
   let navigate = useNavigate();
@@ -14,80 +14,150 @@ const PropPortfolio = () => {
     }
   }, [user.id, navigate]);
 
-  const searchUrl =
-    "https://studentrentapi20230411081843.azurewebsites.net/api/Property/SearchById";
+    const searchUrl =
+        "https://studentrentapi20230411081843.azurewebsites.net/api/Property/SearchById";
+    const deleteUrl =
+        "https://studentrentapi20230411081843.azurewebsites.net/api/Property/DeleteProperty";
 
-  const [homeData, sethomeData] = useState([]);
-  const { userId } = useParams();
-  const withId = (WrappedComponent) => {
-    const ComponentWithId = (props) => {
-      const { id } = useParams();
-      return <WrappedComponent {...props} id={id} />;
+    const [loading, setloading] = useState(false);
+    const [homeData, sethomeData] = useState([]);
+
+    const search = async () => {
+        setloading(true);
+        await axios({
+            method: "post",
+            url: searchUrl,
+            headers: {},
+            data: {
+                accountId: user.id,
+            },
+        })
+            .then((res) => {
+                sethomeData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        setloading(false);
     };
-    return ComponentWithId;
-  };
 
-  useEffect(() => {
-    document.title = "Property - Livin it";
-    search();
-    // eslint-disable-next-line
-  }, []);
+    const handleDelete = async (propertyId) => {
+        const confirmed = window.confirm("Are you sure you want to delete this property?");
+        if (confirmed) {
+            await axios({
+                method: "delete",
+                url: `${deleteUrl}?id=${propertyId}`,
+                headers: {},
+            })
+                .then((res) => {
+                    console.log(`Property with id ${propertyId} has been deleted.`);
+                    const successMsg = document.createElement('div');
+                    successMsg.textContent = `Property with id ${propertyId} has been deleted successfully.`;
+                    document.body.appendChild(successMsg);
+                    window.location.reload();
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    };
 
-  const search = async () => {
-    await axios({
-      method: "post",
-      url: searchUrl,
-      headers: {},
-      data: {
-        accountId: userId,
-      },
-    }).then((res) => {
-      sethomeData(res.data);
-    });
-  };
+    useEffect(() => {
+        document.title = "Property - Livin it";
+        search();
+        // eslint-disable-next-line
+    }, []);
 
-  const onCardSelected = (address, city, state, zipCode) => {
-    console.log(
-      `Address: ${address}, City: ${city}, State: ${state}, Zip Code: ${zipCode}`
-    );
-  };
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-items-center">
-      {homeData.map((value, key) => (
-        <div
-          key={key}
-          className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
-        >
-          <div
-            className="h-57 w-full bg-cover relative"
-            style={{ backgroundImage: "none" }}
-            onClick={() =>
-              onCardSelected(
-                value.address,
-                value.city,
-                value.state,
-                value.zipCode
-              )
-            }
-          >
-            <img
-              src={value.coverImage}
-              alt={value.address}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-            <div className="flex justify-end items-end h-full w-full bg-gray-900 bg-opacity-50"></div>
-          </div>
-          <div className="px-5 py-3">
-            <h3 className="text-gray-700 uppercase">{value.address}</h3>
-            <span className="text-gray-500 mt-2">${value.price}</span>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 px-5 pb-3">
-            <PropertyDetailModal homeData={value} withId={withId} />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+    return (
+        <div className={`flex flex-col w-full h-full gap-4 items-start md:ml-0 ml-10 md:items-center mt-[2%]`}>
+            {loading ? (
+                <>
+                    <div className="flex w-full h h-full justify-center items-center mt-[15%]">
+                        <Oval
+                            color="#ADD8E6"
+                            height={80}
+                            width={80}
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                            ariaLabel="oval-loading"
+                            secondaryColor="#e8f4f8"
+                            strokeWidth={2}
+                            strokeWidthSecondary={2}
+                        ></Oval>
+                    </div>
+                </>
+            ) : (
+        <>
+                    <div className="font-bold text-lg">Property Portfolio</div>
+                    {homeData.length === 0 ? (
+                        <div className="text-lg justify-center mt-[15%]">
+                            No properties found.
+                        </div>
+                    ) : (
+                        <div className="flex flex-wrap justify-between mt-4">
+                            {homeData.map((value, key) => (
+                                <div
+                                    className="flex w-full md:w-[100%] h-auto border-[1px] border-blue-400 mt-1 ml-1 rounded-md flex-row hover:border-blue-600 hover:border-2"
+                                    key={key}
+                                >
+                                    <div className="flex w-[50%] lg:w-[20%] h-full mr-1 object-cover items-center justify-center bg-gray-100">
+                                        <img
+                                            className="h-[100%] w-[100%] object-cover"
+                                            src={value.coverImage}
+                                            alt="Home"
+                                        />
+                                    </div>
+                                    <div className="flex w-[50%] lg:w-[80%] flex-row">
+                                        <div className="flex w-[80%] flex-col">
+                                            <div>
+                                                {value.address}, {value.city},{" "}
+                                                {value.state.toUpperCase()}, {value.zipCode}
+                                            </div>
+                                            <div>Bedroom(s): {value.numberOfBedroom}</div>
+                                            <div>Bathroom(s): {value.numberOfBathroom}</div>
+                                            <div>Year Built: {value.yearBuilt}</div>
+                                            <div>{value.acreage}ft</div>
+                                            <div className="md:hidden flex text-blue-700">
+                                                Display on Map
+                                            </div>
+                                        </div>
+                                        <div className="flex w-[20%] flex-col mr-3 gap-1 lg:gap-2">
+                                            <div className="flex w-full h-full items-center justify-end">
+                                                <PropertyDetailModal
+                                                    homeData={value}
+                                                    withId={true}
+                                                    fromWatchList={false}
+                                                    sethomeData={sethomeData}
+                                                ></PropertyDetailModal>
+                                            </div>
+                                            <div className="flex w-full h-full items-center justify-end">
+                                                <button
+                                                    className="bg-red-500 text-white font-bold py-1 px-2 rounded text-sm"
+                                                    onClick={() => handleDelete(value.propertyId)}
+                                                >
+                                                    Delete Property
+                                                </button>
+                                            </div>
+                                            <div className="flex w-full h-full items-center justify-end">
+                                                <Link
+                                                    className="bg-green-500 text-white font-bold py-1 px-2 rounded text-sm"
+                                                    to={`/updateproperty/${value.propertyId}`}
+                                                >
+                                                    Update Property Information
+                                                </Link>
+                                        </div>
+                                    </div>
+                                </div>
+</div>
+                    ))}
+                </div>
+            )}
+        </>
+    )
+}
+</div >
+);
 };
+
 export default PropPortfolio;
