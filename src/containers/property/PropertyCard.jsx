@@ -33,8 +33,8 @@ export const PropertyCard = ({ homeData, onCardSelected, withId = false }) =>
             </div>
             <div>Bedroom(s): {homeData.numberOfBedroom}</div>
             <div>Bathroom(s): {homeData.numberOfBathroom}</div>
-            <div>Year Built: {homeData.yearBuilt}</div>
-            <div>{homeData.acreage}ft</div>
+            <div>${homeData.price}/month</div>
+            <div>{homeData.acreage} sqft</div>
             <div className="md:hidden flex text-blue-700">Display on Map</div>
           </div>
           <div className="flex w-[20%] flex-col mr-3">
