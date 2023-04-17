@@ -38,7 +38,7 @@ const Signup = () => {
   };
 
   const apiUrl =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/register";
+    "https://studentrentapi20230411081843.azurewebsites.net/api/Auth/register";
 
   // const apiUrl = "https://localhost:7228/api/Auth/register";
   const handleSignup = () => {

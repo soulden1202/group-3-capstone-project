@@ -109,7 +109,7 @@ const UploadProperty = () => {
 
     try {
       const response = await fetch(
-        "https://studentrentapi20230322222647.azurewebsites.net/api/Property/Add",
+        "https://studentrentapi20230411081843.azurewebsites.net/api/Property/Add",
         //"https://localhost:7228/api/Property/Add",
         {
           method: "POST",

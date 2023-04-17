@@ -25,7 +25,7 @@ const Account = () => {
   const [inputValid, setinputValid] = useState(false);
 
   const url =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/InforChange";
+    "https://studentrentapi20230411081843.azurewebsites.net/api/Auth/InforChange";
 
   const handleBlur = () => {
     if (repeatNewPaswword !== newPassword) {

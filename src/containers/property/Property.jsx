@@ -8,7 +8,7 @@ import Geocode from "react-geocode";
 const Property = () => {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
   const searchUrl =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Property/Search";
+    "https://studentrentapi20230411081843.azurewebsites.net/api/Property/Search";
   // const searchUrl = "https://localhost:7228/api/Property/Search";
 
   const [address, setaddress] = useState("");

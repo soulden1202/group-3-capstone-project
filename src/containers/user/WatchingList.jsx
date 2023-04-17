@@ -14,7 +14,7 @@ const Watchinglist = () => {
   const [executed, setexecuted] = useState(false);
 
   const searchUrl =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Property/SearchById";
+    "https://studentrentapi20230411081843.azurewebsites.net/api/Property/SearchById";
 
   const [watchListData, setwatchListData] = useState([]);
   const search = async () => {

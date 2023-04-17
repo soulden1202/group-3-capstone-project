@@ -40,7 +40,7 @@ const Login = () => {
 
   const handleLogin = () => {
     const apiUrl =
-      "https://studentrentapi20230322222647.azurewebsites.net/api/Auth/login";
+      "https://studentrentapi20230411081843.azurewebsites.net/api/Auth/login";
 
     //const apiUrl = "https://localhost:7228/api/Auth/login";
 
