@@ -80,7 +80,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="flex flex-col fixed w-full h-full items-center bg-white bg-contact">
+    <div className="flex flex-col fixed w-full h-full items-center bg-contact">
       <div className="flex text-3xl font-bold mt-[8%] text-black ">
         <p className="">Contact Us</p>
       </div>

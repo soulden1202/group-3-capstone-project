@@ -75,9 +75,8 @@ const Pricing = () => {
                       Our Pricing Plan
                     </h2>
                     <p className="text-body-color text-base">
-                      There are many variations of passages of Lorem Ipsum
-                      available but the majority have suffered alteration in
-                      some form.
+                      Experience everything our service has to offer by joining
+                      us today and taking advantage of our full feature set.
                     </p>
                     <div className="flex flex-row w-full mt-5 justify-center">
                       <button
