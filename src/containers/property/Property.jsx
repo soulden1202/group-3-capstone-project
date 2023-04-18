@@ -36,7 +36,7 @@ const Property = () => {
       data: {
         address: address,
         city: city,
-        state: state.toLowerCase(),
+        state: state,
         zipCode: zipCode === "" ? null : Number(zipCode),
       },
     }).then((res) => {
