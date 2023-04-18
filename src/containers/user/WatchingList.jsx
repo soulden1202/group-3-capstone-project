@@ -44,8 +44,6 @@ const Watchinglist = () => {
 
     setwatchListData(data);
     setloading(false);
-
-    console.log(1);
   };
 
   useEffect(() => {

@@ -34,6 +34,31 @@ export const PropertyDetailModal = ({
   const user = useSelector((state) => state.user);
   const isPremium = usePremiumStatus(user);
 
+  const templateSubject = `Inquiry About Rental Property`;
+  const templateBody = `
+Dear [Landlord/Property Manager],
+
+I hope this email finds you well. I am writing to express my interest in renting the property located at ${
+    homeData.address +
+    ", " +
+    homeData.city +
+    ", " +
+    homeData.state +
+    ", " +
+    homeData.zipCode
+  }. I came across this property on https://livin-it.netlify.app/ and was impressed by its features.
+
+If it's possible, could you please let me know the availability of the property and arrange a time for me to view it? Additionally, I would like to know more about the rental terms, such as the rent price, deposit, lease term, and any other necessary details.
+
+Thank you for your time and consideration, and I look forward to hearing back from you soon.
+
+Best regards,
+
+${user.firstName + " " + user.lastName}
+`;
+
+  const formattedTemplateBody = templateBody.replace(/\n/g, "%0D%0A");
+
   useEffect(() => {
     if (user.id !== null) setdisable(false);
     if (user.id === null) setdisable(true);
@@ -71,15 +96,14 @@ export const PropertyDetailModal = ({
         if (res.status === 200) {
           let data = [];
           data = data.concat(user.watchList);
-          console.log(data);
+
           data.push(homeData.propertyId);
-          console.log(data);
+
           dispatch(
             updateWatchList({
               watchList: data,
             })
           );
-          console.log(user.watchList);
         }
         toast.success("Added to watch list!", {
           position: "bottom-center",
@@ -93,7 +117,6 @@ export const PropertyDetailModal = ({
         });
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Add to watch list failed", {
           position: "bottom-center",
           autoClose: 5000,
@@ -122,11 +145,9 @@ export const PropertyDetailModal = ({
           let data = [];
 
           data = data.concat(user.watchList);
-          console.log(data);
 
           data = data.filter((id) => id !== homeData.propertyId);
 
-          console.log(data);
           dispatch(
             updateWatchList({
               watchList: data,
@@ -176,7 +197,7 @@ export const PropertyDetailModal = ({
         More Detail
       </button>
       {open === true && (
-        <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden  inset-0 h-full">
+        <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden inset-0 h-full">
           <div className="flex relative w-full h-full ">
             <div className="relative w-full bg-white rounded-lg shadow h-full overflow-y-scroll ">
               <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600 mt-20">
@@ -225,7 +246,14 @@ export const PropertyDetailModal = ({
                         {(isPremium && user.accountType === "Renter") ||
                         (isPremium && user.accountType === "Both") ? (
                           <>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                            <button
+                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
+                              onClick={() =>
+                                window.open(
+                                  `mailto:${homeData.email}?subject=${templateSubject}&body=${formattedTemplateBody}`
+                                )
+                              }
+                            >
                               Contact
                             </button>
 
@@ -249,22 +277,12 @@ export const PropertyDetailModal = ({
                         ) : (
                           <>
                             <button
+                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
                               onClick={() =>
-                                toast.warn(
-                                  "You need correct account type and subscription to use this feature.",
-                                  {
-                                    position: "bottom-center",
-                                    autoClose: 5000,
-                                    hideProgressBar: false,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                    progress: undefined,
-                                    theme: "light",
-                                  }
+                                window.open(
+                                  `mailto:${homeData.email}?subject=${templateSubject}&body=${formattedTemplateBody}`
                                 )
                               }
-                              class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
                             >
                               Contact
                             </button>
