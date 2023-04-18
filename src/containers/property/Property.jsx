@@ -8,7 +8,7 @@ import Geocode from "react-geocode";
 const Property = () => {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
   const searchUrl =
-    "https://studentrentapi20230322222647.azurewebsites.net/api/Property/Search";
+    "https://studentrentapi20230411081843.azurewebsites.net/api/Property/Search";
   // const searchUrl = "https://localhost:7228/api/Property/Search";
 
   const [address, setaddress] = useState("");
@@ -128,7 +128,7 @@ const Property = () => {
             placeholder="State"
             onChange={(e) => setstate(e.target.value)}
           >
-            <option value="">Not selected</option>
+            <option value="">State</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -226,7 +226,7 @@ const Property = () => {
             </div>
           )}
           {homeData.length > 0 && !isLoading && (
-            <div>
+            <div className="w-full h-full">
               {homeData.map((value, key) => (
                 <PropertyCard
                   homeData={value}
@@ -238,7 +238,7 @@ const Property = () => {
           )}
           {!isLoading && homeData.length === 0 && (
             <div className="flex justify-center items-center h-full">
-              No data to show
+              No home list to show
             </div>
           )}
         </div>
@@ -261,7 +261,7 @@ const Property = () => {
           </div>
         ) : (
           <div className="w-[0%] md:w-[60%] md:flex hidden h-full justify-center items-center">
-            No information to display
+            No map to display
           </div>
         )}
       </div>

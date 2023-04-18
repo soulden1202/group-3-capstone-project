@@ -6,19 +6,29 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { CreateCustomerPortal } from "./CreateCustomerPortal";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Stripe from "stripe";
+import moment from "moment/moment";
 
 const Subscription = () => {
   const user = useSelector((state) => state.user);
   const [stripeId, setstripeId] = useState("");
+  const [subsInfo, setsubsInfo] = useState({});
+  const stripe = new Stripe(process.env.REACT_APP_STRIPE_API_KEY);
 
   const isPremium = usePremiumStatus(user);
   const navigate = useNavigate();
 
   const handleOnclick = () => {
     if (isPremium && stripeId !== "") {
-      console.log(stripeId);
       CreateCustomerPortal(stripeId);
     }
+  };
+
+  const getSubsInfor = async () => {
+    const infor = await stripe.subscriptions.list({
+      customer: stripeId,
+    });
+    setsubsInfo(infor.data[0]);
   };
 
   useEffect(() => {
@@ -30,19 +40,46 @@ const Subscription = () => {
         }
       });
     }
-  }, [isPremium, user.id]);
+    if (stripeId) {
+      getSubsInfor();
+    }
+    // eslint-disable-next-line
+  }, [isPremium, user.id, stripeId]);
 
   return (
     <>
-      <div className="z-0 fixed w-full h-full align-middle items-center justify-cente">
+      <div className="z-0 fixed w-full h-full align-middle items-center justify-center">
         <div className="flex flex-col w-full h-full">
           <div className="flex items-center justify-center text-xl mt-5 font-bold">
             Your Subscription
           </div>
           {isPremium ? (
-            <div className="flex items-center justify-center text-xl">
+            <div className="flex flex-col items-center justify-center text-xl gap-4 mt-[5%]">
+              <div>
+                <b>Status:</b>{" "}
+                {subsInfo.status === "active" && (
+                  <span className="text-green-500">Active</span>
+                )}
+              </div>
+              <div>
+                <b>Subscription start:</b>{" "}
+                {moment.unix(subsInfo.current_period_start).format("LLL")}{" "}
+              </div>
+              <div>
+                <b>Subscription end:</b>{" "}
+                {moment.unix(subsInfo.current_period_end).format("LLL")}{" "}
+              </div>
+              <div>
+                <b>Auto renewal:</b>{" "}
+                {subsInfo.cancel_at_period_end ? (
+                  <span className="text-red-500">False</span>
+                ) : (
+                  <span className="text-green-500">True</span>
+                )}
+              </div>
+
               <button
-                className="flex cursor-pointer mt-[15%] justify-center items-center h-11 w-[15rem] text-sm font-semibold transition-colors rounded-xl text-gray-600 bg-gray-100 hover:text-white hover:bg-gradient-to-r hover:bg-red-500 hover:from-red-400 hover:to-red-500"
+                className="flex cursor-pointer justify-center items-center h-11 w-[15rem] text-sm font-semibold transition-colors rounded-xl text-gray-600 bg-gray-100 hover:text-white hover:bg-gradient-to-r hover:bg-red-500 hover:from-red-400 hover:to-red-500"
                 onClick={handleOnclick}
               >
                 Manage your membership

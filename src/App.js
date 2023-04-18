@@ -15,6 +15,7 @@ import PropPortfolio from "./containers/property/PropPortfolio";
 import Pricing from "./containers/pricing/Pricing";
 import { NavBar } from "./components";
 import store from "./containers/login/store";
+import UpdateProperty from "./containers/property/UpdateProperty";
 
 const App = () => {
     return (
@@ -37,6 +38,7 @@ const App = () => {
                     path="/user/:userId/UploadProperty"
                     element={<UploadProperty />}
                 />
+                <Route path="/UpdateProperty/:propertyId" element={<UpdateProperty />} />
             </Routes>
         </Provider>
     );

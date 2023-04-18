@@ -5,15 +5,33 @@ import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import usePremiumStatus from "../../stripe/usePremiumStatus";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateWatchList } from "../login/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
 import "./adjust.css";
 
-export const PropertyDetailModal = ({ homeData, withId }) => {
+export const PropertyDetailModal = ({
+  homeData,
+  withId,
+  fromWatchList = false,
+  watchListData,
+  setwatchListData,
+}) => {
   const [open, setopen] = useState(false);
   const [disable, setdisable] = useState(true);
   const navigate = useNavigate();
+
+  const [isInWatchList, setisInWatchList] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const url =
+    "https://studentrentapi20230411081843.azurewebsites.net/api/Property/WatchList";
 
   const user = useSelector((state) => state.user);
   const isPremium = usePremiumStatus(user);
@@ -24,7 +42,17 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
   useEffect(() => {
     if (user.id !== null) setdisable(false);
     if (user.id === null) setdisable(true);
-  }, [user.id, disable]);
+    if (user.watchList) {
+      if (user.watchList.includes(homeData.propertyId)) {
+        setisInWatchList(true);
+      } else {
+        setisInWatchList(false);
+      }
+    } else {
+      setisInWatchList(false);
+    }
+    // eslint-disable-next-line
+  }, [user.id, disable, user.watchList]);
 
   let images = [];
   homeData.otherImages.forEach((image) => {
@@ -34,7 +62,114 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
     });
   });
 
-  console.log(homeData);
+  const handleAddToWatchList = async () => {
+    await axios({
+      method: "post",
+      url: url,
+      headers: {},
+      data: {
+        accountId: user.id,
+        propertyId: homeData.propertyId,
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          let data = [];
+          data = data.concat(user.watchList);
+          console.log(data);
+          data.push(homeData.propertyId);
+          console.log(data);
+          dispatch(
+            updateWatchList({
+              watchList: data,
+            })
+          );
+          console.log(user.watchList);
+        }
+        toast.success("Added to watch list!", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Add to watch list failed", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
+
+  const handleRemoveFromWatchList = async () => {
+    await axios({
+      method: "post",
+      url: url,
+      headers: {},
+      data: {
+        accountId: user.id,
+        propertyId: homeData.propertyId,
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          let data = [];
+
+          data = data.concat(user.watchList);
+          console.log(data);
+
+          data = data.filter((id) => id !== homeData.propertyId);
+
+          console.log(data);
+          dispatch(
+            updateWatchList({
+              watchList: data,
+            })
+          );
+        }
+        if (fromWatchList) {
+          const homeFiltered = watchListData.filter(
+            (item) => item.propertyId !== homeData.propertyId
+          );
+          setwatchListData(homeFiltered);
+          setopen(false);
+        }
+        toast.success("Removed from watch list!", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Failed to remove from watch list", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
 
   
 
@@ -100,17 +235,48 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
                               Contact
                             </button>
-                            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                              Add to watch list
-                            </button>
+
+                            {isInWatchList ? (
+                              <button
+                                onClick={() => handleRemoveFromWatchList()}
+                                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                              >
+                                Remove from watch list
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleAddToWatchList()}
+                                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                              >
+                                Add to watch list
+                              </button>
+                            )}
+                            <ToastContainer></ToastContainer>
                           </>
                         ) : (
                           <>
                             <button
+
                               onClick={() => 
                                 alert(
                                   "You need correct account type and subscription to use this feature."
                                 ) 
+
+                              onClick={() =>
+                                toast.warn(
+                                  "You need correct account type and subscription to use this feature.",
+                                  {
+                                    position: "bottom-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "light",
+                                  }
+                                )
+
                               }
                               class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
                             >
@@ -118,14 +284,25 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                             </button>
                             <button
                               onClick={() =>
-                                alert(
-                                  "You need correct account type and subscription to use this feature."
+                                toast.warn(
+                                  "You need correct account type and subscription to use this feature.",
+                                  {
+                                    position: "bottom-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "light",
+                                  }
                                 )
                               }
                               class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
                             >
                               Add to watch list
                             </button>
+                            <ToastContainer></ToastContainer>
                           </>
                         )}
                       </>
@@ -169,14 +346,25 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                             <div className="flex items-center">
                               <button
                                 onClick={() =>
-                                  alert(
-                                    "You need correct account type and subscription to use this feature."
+                                  toast.warn(
+                                    "You need correct account type and subscription to use this feature.",
+                                    {
+                                      position: "bottom-center",
+                                      autoClose: 5000,
+                                      hideProgressBar: false,
+                                      closeOnClick: true,
+                                      pauseOnHover: true,
+                                      draggable: true,
+                                      progress: undefined,
+                                      theme: "light",
+                                    }
                                   )
                                 }
                                 class="bg-gray-500  text-white font-bold py-2 px-4"
                               >
                                 See Listing From Same Owner
                               </button>
+                              <ToastContainer></ToastContainer>
                             </div>
                           </>
                         )}
