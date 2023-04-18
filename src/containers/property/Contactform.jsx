@@ -8,9 +8,9 @@ const ContactButton = ({ recipientEmail }) => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
-  const emailService = process.env.REACT_APP_EMAIL_SERVICE_ID;
-  const emailTemplate = process.env.REACT_APP_EMAIL_TEMPLATE_ID;
-  const emailUser = process.env.REACT_APP_EMAIL_USER_ID;
+//   const emailService = process.env.REACT_APP_EMAIL_SERVICE_ID;
+//   const emailTemplate = process.env.REACT_APP_EMAIL_TEMPLATE_ID;
+//   const emailUser = process.env.REACT_APP_EMAIL_USER_ID;
 
   const user = useSelector((state) => state.user);
   const senderEmail = user.email;
@@ -19,7 +19,8 @@ const ContactButton = ({ recipientEmail }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    emailjs.send(emailService, emailTemplate, {
+                //emailService       emailTemplate
+    emailjs.send('service_2uhOplm', 'template_4nlmxjs', {
       to_email: recipientEmail,
       from_name: 'User',
       from_email: senderEmail,
