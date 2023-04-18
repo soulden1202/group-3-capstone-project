@@ -8,6 +8,8 @@ import {
 import { BsHouseAdd, BsHouseGear } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdAttachMoney } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { changeNavbarSize } from "../../containers/login/userSlice";
 const Sidenav = ({
   accountType,
   onAccountPage,
@@ -18,6 +20,16 @@ const Sidenav = ({
 }) => {
   const [isMinimized, setisMinimized] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const handleOnlick = (value) => {
+    setisMinimized(value);
+    dispatch(
+      changeNavbarSize({
+        navBarMinimized: value,
+      })
+    );
+  };
   return (
     <div
       className={`fixed flex flex-col left-0 ${
@@ -32,7 +44,7 @@ const Sidenav = ({
                 <div className="text-sm font-light tracking-wide text-gray-500 cursor-default">
                   Menu
                 </div>
-                <button onClick={() => setisMinimized(true)}>
+                <button onClick={() => handleOnlick(true)}>
                   <AiOutlineClose></AiOutlineClose>
                 </button>
               </div>
@@ -137,7 +149,7 @@ const Sidenav = ({
           <ul className="flex flex-col py-4 space-y-1">
             <li className="ml-3">
               <div className="flex flex-row items-center h-8">
-                <button onClick={() => setisMinimized(false)}>
+                <button onClick={() => handleOnlick(false)}>
                   <RxHamburgerMenu></RxHamburgerMenu>
                 </button>
               </div>
