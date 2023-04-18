@@ -8,7 +8,6 @@ export async function CreateCustomerPortal(stripeId) {
       customer: stripeId,
       return_url: window.location.origin,
     });
-    console.log(session);
 
     window.location = session.url;
   }

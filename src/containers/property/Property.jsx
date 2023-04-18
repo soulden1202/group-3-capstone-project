@@ -26,8 +26,6 @@ const Property = () => {
   }, []);
 
   const search = async () => {
-    console.log(address, city, state, zipCode);
-
     setisLoading(true);
     await axios({
       method: "post",
@@ -78,7 +76,6 @@ const Property = () => {
         home.city
       }, ${home.state.toUpperCase()}, ${home.zipCode}`;
 
-      console.log(searhAdress);
       await Geocode.fromAddress(searhAdress).then(
         (response) => {
           const { lat, lng } = response.results[0].geometry.location;
@@ -97,7 +94,6 @@ const Property = () => {
         }
       );
     });
-    console.log(latlng);
     setisLoading(false);
   };
 
