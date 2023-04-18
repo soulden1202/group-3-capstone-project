@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import usePremiumStatus from "../../stripe/usePremiumStatus";
 
+
+
 import "./adjust.css";
 
 export const PropertyDetailModal = ({ homeData, withId }) => {
@@ -15,6 +17,9 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
 
   const user = useSelector((state) => state.user);
   const isPremium = usePremiumStatus(user);
+  
+
+  
 
   useEffect(() => {
     if (user.id !== null) setdisable(false);
@@ -30,6 +35,8 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
   });
 
   console.log(homeData);
+
+  
 
   return (
     <>
@@ -100,10 +107,10 @@ export const PropertyDetailModal = ({ homeData, withId }) => {
                         ) : (
                           <>
                             <button
-                              onClick={() =>
+                              onClick={() => 
                                 alert(
                                   "You need correct account type and subscription to use this feature."
-                                )
+                                ) 
                               }
                               class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
                             >
