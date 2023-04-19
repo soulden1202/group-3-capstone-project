@@ -5,6 +5,10 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { changeName } from "../login/userSlice";
 import { Oval } from "react-loader-spinner";
+import {
+  logout,
+  logInWithEmailAndPassword,
+} from "../../firebase/firebaseClient";
 
 const Account = () => {
   const user = useSelector((state) => state.user);
@@ -71,6 +75,8 @@ const Account = () => {
                 lastName: lastName,
               })
             );
+            logout();
+            logInWithEmailAndPassword(user.email, newPassword);
           }
         })
         .catch((err) => {

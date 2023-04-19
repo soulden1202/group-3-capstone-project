@@ -86,7 +86,7 @@ const UserPage = () => {
             onSubscriptionPage={onSubscriptionPage}
           ></SideNav>
         </div>
-        <div className="w-full h-full">
+        <div className="w-full h-[90%]">
           {isAccountPage && <Account></Account>}
           {isPropretyPage && <PropPortfolio></PropPortfolio>}
           {isAddPropertyPage && <UploadProperty></UploadProperty>}
