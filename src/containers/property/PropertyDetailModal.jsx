@@ -277,12 +277,21 @@ ${user.firstName + " " + user.lastName}
                         ) : (
                           <>
                             <button
-                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
                               onClick={() =>
-                                window.open(
-                                  `mailto:${homeData.email}?subject=${templateSubject}&body=${formattedTemplateBody}`
+                                toast.warn(
+                                  "You need correct account type and subscription to use this feature.",
+                                  {
+                                    position: "bottom-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                  }
                                 )
                               }
+                              class="bg-gray-500 text-white font-bold py-2 px-4 rounded"
                             >
                               Contact
                             </button>
@@ -323,8 +332,8 @@ ${user.firstName + " " + user.lastName}
                     <div className="flex flex-col w-[50%] justify-center text-left">
                       <p>Number of Bedroom(s): {homeData.numberOfBedroom}</p>
                       <p>Number of Bathroom(s): {homeData.numberOfBathroom}</p>
-                      <p>Acreage: {homeData.acreage} sqft</p>
-                      <p>Price: ${homeData.price}/month</p>
+                      <p>{homeData.acreage} sqft</p>
+                      <p>${homeData.price}/month</p>
                     </div>
                   </div>
                   <div className="flex items-center justify-center w-full mt-5">
