@@ -9,12 +9,14 @@ const Property = () => {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
   const searchUrl =
     "https://studentrentapi20230411081843.azurewebsites.net/api/Property/Search";
-  // const searchUrl = "https://localhost:7228/api/Property/Search";
+  //const searchUrl = "https://localhost:7228/api/Property/Search";
 
   const [address, setaddress] = useState("");
   const [city, setcity] = useState("");
   const [state, setstate] = useState("");
   const [zipCode, setzipCode] = useState("");
+  const [priceStart, setpriceStart] = useState("");
+  const [priceEnd, setpriceEnd] = useState("");
   const [homeData, sethomeData] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [center, setcenter] = useState({});
@@ -36,6 +38,8 @@ const Property = () => {
         city: city,
         state: state,
         zipCode: zipCode === "" ? null : Number(zipCode),
+        priceStart: priceStart === "" ? null : Number(priceStart),
+        priceEnd: priceEnd === "" ? null : Number(priceEnd),
       },
     }).then((res) => {
       sethomeData(res.data);
@@ -51,6 +55,22 @@ const Property = () => {
     const re = /^[0-9\b]+$/;
     if (e.target.value === "" || re.test(e.target.value)) {
       setzipCode(e.target.value);
+    }
+  };
+
+  const onChangePriceStart = (e) => {
+    const re = /^[0-9\b]+$/;
+    let value = e.target.value.split("$")[1];
+    if (value === "" || re.test(value)) {
+      setpriceStart(value);
+    }
+  };
+
+  const onChangePriceEnd = (e) => {
+    const re = /^[0-9\b]+$/;
+    let value = e.target.value.split("$")[1];
+    if (value === "" || re.test(value)) {
+      setpriceEnd(value);
     }
   };
 
@@ -104,7 +124,7 @@ const Property = () => {
 
   return (
     <div className="flex flex-col fixed w-full h-full ">
-      <div className="flex items-center my-2 w-full ">
+      <div className="flex items-center my-2 w-[100%] md:w-[200%] ">
         <div className="flex space-x-1 w-[100%] md:w-[40%]">
           <input
             type="text"
@@ -183,6 +203,20 @@ const Property = () => {
             placeholder="Zipcode"
             value={zipCode}
             onChange={onChange}
+          />
+          <input
+            type="text"
+            className="block w-[20%] px-4 py-2 text-black bg-white border-2 rounded-full focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+            placeholder="Start Price"
+            value={`$${priceStart}`}
+            onChange={onChangePriceStart}
+          />
+          <input
+            type="text"
+            className="block w-[20%] px-4 py-2 text-black bg-white border-2 rounded-full focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+            placeholder="Max Price"
+            value={`$${priceEnd}`}
+            onChange={onChangePriceEnd}
           />
           <button
             className="px-4 text-white bg-blue-600 rounded-full"
