@@ -9,7 +9,7 @@ const Property = () => {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
   const searchUrl =
     "https://studentrentapi20230411081843.azurewebsites.net/api/Property/Search";
-  //const searchUrl = "https://localhost:7228/api/Property/Search";
+  // const searchUrl = "https://localhost:7228/api/Property/Search";
 
   const [address, setaddress] = useState("");
   const [city, setcity] = useState("");
@@ -60,7 +60,7 @@ const Property = () => {
 
   const onChangePriceStart = (e) => {
     const re = /^[0-9\b]+$/;
-    let value = e.target.value.split("$")[1];
+    let value = e.target.value;
     if (value === "" || re.test(value)) {
       setpriceStart(value);
     }
@@ -68,7 +68,7 @@ const Property = () => {
 
   const onChangePriceEnd = (e) => {
     const re = /^[0-9\b]+$/;
-    let value = e.target.value.split("$")[1];
+    let value = e.target.value;
     if (value === "" || re.test(value)) {
       setpriceEnd(value);
     }
@@ -208,16 +208,18 @@ const Property = () => {
             type="text"
             className="block w-[20%] px-4 py-2 text-black bg-white border-2 rounded-full focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             placeholder="Start Price"
-            value={`$${priceStart}`}
+            value={priceStart}
             onChange={onChangePriceStart}
           />
+
           <input
             type="text"
             className="block w-[20%] px-4 py-2 text-black bg-white border-2 rounded-full focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             placeholder="Max Price"
-            value={`$${priceEnd}`}
+            value={priceEnd}
             onChange={onChangePriceEnd}
           />
+
           <button
             className="px-4 text-white bg-blue-600 rounded-full"
             onClick={search}
