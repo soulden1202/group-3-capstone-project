@@ -8,9 +8,9 @@ const About = () => {
   }, []);
 
   const titleStyles = {
-    fontSize: "55px",
-    marginTop: "0px",
-    paddingTop: "20px",
+    fontSize: "50px",
+    marginTop: "15px",
+    paddingTop: "50px",
   };
 
   const teamStyles = {
@@ -19,7 +19,7 @@ const About = () => {
 
   return (
     <div className="about-container">
-      <div className="team-box" style={{ marginTop: "150px" }}>
+      <div className="team-box" style={{ marginTop: "95px" }}>
         <h1 style={titleStyles}> About Us </h1>
 
         <h2 style={{ marginTop: "60px" }}>Our team of experienced professionals is dedicated to helping students to find their dream place to stay.</h2>
