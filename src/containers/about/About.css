@@ -1,65 +1,106 @@
+/* About.css */
+
 .about-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 90vh;
-    background-image: url("building_apartme.jpg");
-    background-size: cover;
-    background-position: center center;
-    filter: brightness(100%) contrast(100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  background-image: url("building_apartme.jpg");
+  background-size: cover;
+  background-position: center center;
+  filter: brightness(100%) contrast(100%);
 }
 
 .about-container h1 {
-   position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    margin:0;
-    color: antiquewhite;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  margin: 0;
+  color: antiquewhite;
 }
 
 .about-container h2 {
-    font-size: 33px;
-    top: 0%;
-    color: #6e6d6d;
+  font-size: 33px;
+  top: 0%;
+  color: #6e6d6d;
 }
-
 
 .team-container {
-
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-    margin-left: 20px;
-    align-items: center;
-    margin-top: 50px;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  margin-left: 20px;
+  align-items: center;
+  margin-top: 50px;
+  color: white;
 }
 
-
 .team-box {
-    background-color: #92caef;
-    padding: 20px;
-    border-radius: 10px;
+  background-color: #92caef;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .team-box h2 {
-    font-size: 30px;
-    margin-bottom: 10px;
-    text-align: center;
+  font-size: 30px;
+  margin-bottom: 10px;
+  text-align: center;
 }
-.team-container ul {
-    list-style: none;
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-    color: #6e6d6d;
 
+.team-container ul {
+  list-style: none;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  color: #6e6d6d;
 }
 
 .team-container li {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+/* Responsive styles */
+
+@media only screen and (max-width: 768px) {
+  .about-container h1 {
+    font-size: 2rem;
+    top: 15%;
+  }
+
+  .about-container h2 {
+    font-size: 24px;
+  }
+
+  .team-container {
+    margin-left: 0;
+  }
+
+  .team-container li {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .about-container h1 {
+    font-size: 1.5rem;
+    top: 10%;
+  }
+
+  .about-container h2 {
     font-size: 20px;
-    margin-bottom: 5px;
+  }
+
+  .team-container ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .team-container li {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
 }
