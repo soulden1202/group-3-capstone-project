@@ -1,7 +1,12 @@
 import React from "react";
 import { PropertyDetailModal } from "./PropertyDetailModal";
 
-export const PropertyCard = ({ homeData, onCardSelected, withId = false }) =>
+export const PropertyCard = ({
+  homeData,
+  onCardSelected,
+  withId = false,
+  position,
+}) =>
   //   propertyId,
   //   address,
   //   numOfBedroom,
@@ -34,8 +39,15 @@ export const PropertyCard = ({ homeData, onCardSelected, withId = false }) =>
             <div>Bedroom(s): {homeData.numberOfBedroom}</div>
             <div>Bathroom(s): {homeData.numberOfBathroom}</div>
             <div>${homeData.price}/month</div>
-            <div>{homeData.acreage} sqft</div>
-            <div className="md:hidden flex text-blue-700">Display on Map</div>
+
+            <a
+              className="md:hidden flex hover:text-blue-700 text-blue-500"
+              href={`https://maps.google.com/?q=${position.lat},${position.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Display on Map
+            </a>
           </div>
           <div className="flex w-[20%] flex-col mr-3">
             <div className="flex w-full h-full items-center justify-end">
