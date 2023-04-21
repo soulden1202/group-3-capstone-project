@@ -264,6 +264,7 @@ const Property = () => {
                   homeData={value}
                   key={value.propertyId}
                   onCardSelected={onCardSelected}
+                  position={position}
                 />
               ))}
             </div>
