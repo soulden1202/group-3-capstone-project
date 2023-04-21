@@ -8,9 +8,9 @@ const About = () => {
   }, []);
 
   const titleStyles = {
-    fontSize: "50px",
+    fontSize: "44px",
     marginTop: "15px",
-    paddingTop: "50px",
+    paddingTop: "200px",
   };
 
   const teamStyles = {
