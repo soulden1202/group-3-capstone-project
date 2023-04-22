@@ -40,14 +40,18 @@ export const PropertyCard = ({
             <div>Bathroom(s): {homeData.numberOfBathroom}</div>
             <div>${homeData.price}/month</div>
 
-            <a
-              className="md:hidden flex hover:text-blue-700 text-blue-500"
-              href={`https://maps.google.com/?q=${position.lat},${position.lng}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Display on Map
-            </a>
+            {withId === true ? (
+              <></>
+            ) : (
+              <a
+                className="md:hidden flex hover:text-blue-700 text-blue-500"
+                href={`https://maps.google.com/?q=${position?.lat},${position?.lng}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Display on Map
+              </a>
+            )}
           </div>
           <div className="flex w-[20%] flex-col mr-3">
             <div className="flex w-full h-full items-center justify-end">
