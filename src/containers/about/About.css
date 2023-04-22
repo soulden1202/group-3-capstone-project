@@ -14,7 +14,7 @@
 
 .about-container h1 {
   position: absolute;
-  top: 20%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3rem;
@@ -45,22 +45,22 @@
 }
 
 .team-box h2 {
-  font-size: 30px;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 2px;
   text-align: center;
 }
 
 .team-container ul {
   list-style: none;
-  margin: 10px;
-  padding: 10px;
+  margin: 0px;
+  padding: 0px;
   text-align: center;
   color: #6e6d6d;
 }
 
 .team-container li {
-  font-size: 20px;
-  margin-bottom: 5px;
+  font-size: 15px;
+  margin-bottom: 0px;
 }
 
 /* Responsive styles */
